@@ -2,17 +2,19 @@ import Image from "next/image";
 
 export default function Logo() {
   return (
-    <div className="flex gap-1 items-center">
-      <Image
-        className="object-contain"
-        alt="Logo"
-        width={50}
-        height={50}
-        src={"/logo.png"}
-      />
-      <div>
-        <h1 className="text-primary font-bold text-lg">Edu-matrix</h1>
+    <div className="flex items-center gap-2 select-none">
+      <div className="relative h-10 w-10 shrink-0">
+        <Image
+          src="/brand-logo.png"
+          alt="Edu-matrix logo"
+          fill
+          priority
+          className="object-contain py-1"
+        />
       </div>
+      <span className="text-primary font-bold text-lg tracking-tight whitespace-nowrap">
+        Edu-matrix
+      </span>
     </div>
   );
 }

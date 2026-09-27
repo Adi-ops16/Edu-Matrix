@@ -1,7 +1,7 @@
 "use client";
 
+import { IconMoon, IconSun } from "@tabler/icons-react";
 import { motion } from "framer-motion";
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Spinner } from "../ui/spinner";
@@ -20,7 +20,6 @@ const ThemeToggleButton = () => {
   }
 
   const handleThemeChange = (themeStatus: string) => {
-    localStorage.setItem("theme", themeStatus);
     setTheme(themeStatus);
   };
 
@@ -30,7 +29,7 @@ const ThemeToggleButton = () => {
     <button
       type="button"
       onClick={() => handleThemeChange(isDark ? "light" : "dark")}
-      className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background hover:bg-accent transition-colors cursor-pointer"
+      className="relative flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background hover:bg-accent transition-colors cursor-pointer"
       aria-label="Toggle theme"
     >
       <motion.div
@@ -45,7 +44,7 @@ const ThemeToggleButton = () => {
           ease: [0.4, 0, 0.2, 1],
         }}
       >
-        <Moon className="h-5 w-5 text-foreground" />
+        <IconMoon className="h-5 w-5 text-foreground" />
       </motion.div>
 
       <motion.div
@@ -60,7 +59,7 @@ const ThemeToggleButton = () => {
           ease: [0.4, 0, 0.2, 1],
         }}
       >
-        <Sun className="h-5 w-5 text-foreground" />
+        <IconSun className="h-5 w-5 text-foreground" />
       </motion.div>
     </button>
   );
