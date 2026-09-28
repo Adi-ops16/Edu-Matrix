@@ -1,5 +1,5 @@
 "use client";
-import { IconBrandGoogle, IconEye, IconEyeClosed } from "@tabler/icons-react";
+import { IconEye, IconEyeClosed } from "@tabler/icons-react";
 import { useForm } from "@tanstack/react-form";
 import { cn } from "cn";
 import Image from "next/image";
@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useLogin } from "@/hooks";
 import { loginSchema } from "@/schemas";
+import GoogleAuthButton from "../Buttons/GoogleAuthButton";
 import { Spinner } from "../ui/spinner";
 import { toast } from "../ui/toast";
 
@@ -173,13 +174,10 @@ export function LoginForm({
               </Button>
 
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                Or continue with
+                Or
               </FieldSeparator>
 
-              <Button variant="outline" type="button">
-                <IconBrandGoogle />
-                Login with Google
-              </Button>
+              <GoogleAuthButton />
 
               <FieldDescription className="text-center">
                 Don&apos;t have an account?{" "}

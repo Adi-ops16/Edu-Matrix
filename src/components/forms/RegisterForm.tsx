@@ -11,6 +11,7 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import GoogleAuthButton from "../Buttons/GoogleAuthButton";
 
 export function RegisterForm({
   className,
@@ -62,14 +63,11 @@ export function RegisterForm({
                 <Button type="submit">Create Account</Button>
               </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                Or continue with
+                Or
               </FieldSeparator>
-              <Field className="grid grid-cols-3 gap-4">
-                <Button variant="outline" type="button">
-                  Google
-                  <span className="sr-only">Sign up with Google</span>
-                </Button>
-              </Field>
+
+              <GoogleAuthButton isRegister />
+
               <FieldDescription className="text-center">
                 Already have an account? <Link href="/login">Sign in</Link>
               </FieldDescription>
@@ -81,7 +79,7 @@ export function RegisterForm({
               height={200}
               src="/registerBanner.png"
               alt="Register form image"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.8]"
             />
           </div>
         </CardContent>
