@@ -4,6 +4,7 @@ import { useForm } from "@tanstack/react-form";
 import { cn } from "cn";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { FetchError } from "ofetch";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const { mutate: login, isPending } = useLogin();
 
@@ -58,6 +60,13 @@ export function LoginForm({
             title: "Login Successful",
             description: "Welcome back to edu-matrix",
           });
+
+          console.log(res);
+
+          const role = res.data?.role;
+          role
+            ? router.push(`/${role.toLowerCase()}`)
+            : router.push("/select-institution");
         },
         onError: (err: FetchError) => {
           const message = err.data?.message;
