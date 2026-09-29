@@ -1,3 +1,6 @@
+import type z from "zod";
+import type { createInstitutionSchema } from "@/schemas";
+
 export type InstitutionStatus = "PENDING" | "APPROVED" | "REJECTED";
 
 export interface Institution {
@@ -22,3 +25,5 @@ export type ApplyForInstitutionPayload = {
   institution_id: number;
   role: "STUDENT" | "TEACHER";
 };
+
+export type CreateInstitutionPayload = z.infer<typeof createInstitutionSchema>;

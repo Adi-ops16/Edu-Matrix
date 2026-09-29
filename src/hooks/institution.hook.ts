@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { applyForInstitution, getInstitutions } from "@/api";
+import { applyForInstitution, createInstitution, getInstitutions } from "@/api";
 
 export const useGetInstitutions = () => {
   return useQuery({
@@ -11,5 +11,11 @@ export const useGetInstitutions = () => {
 export const useApplyForInstitution = () => {
   return useMutation({
     mutationFn: applyForInstitution,
+  });
+};
+
+export const useCreateInstitution = () => {
+  return useMutation({
+    mutationFn: createInstitution,
   });
 };

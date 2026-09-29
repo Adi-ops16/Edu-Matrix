@@ -2,6 +2,7 @@ import apiClient from "@/lib/ofetch";
 import type {
   ApiResponse,
   ApplyForInstitutionPayload,
+  CreateInstitutionPayload,
   Institution,
 } from "@/types";
 
@@ -19,4 +20,11 @@ export const applyForInstitution = (payload: ApplyForInstitutionPayload) => {
       body: payload,
     },
   );
+};
+
+export const createInstitution = (payload: CreateInstitutionPayload) => {
+  return apiClient<ApiResponse<Institution>>(`${prefix}/create-institution`, {
+    method: "POST",
+    body: payload,
+  });
 };

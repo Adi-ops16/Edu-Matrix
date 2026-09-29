@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
+import { type ReactNode, Suspense } from "react";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { Spinner } from "@/components/ui/spinner";
 import { DashboardHeader } from "./DashboardHeader";
 import { DashboardSidebar } from "./DashboardSidebar";
 
@@ -15,7 +16,9 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
     >
       <DashboardSidebar variant="sidebar" />
       <SidebarInset>
-        <DashboardHeader />
+        <Suspense fallback={<Spinner />}>
+          <DashboardHeader />
+        </Suspense>
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
             {children}
