@@ -9,7 +9,7 @@ export default function TeacherDashboardLayout({
 }) {
   return (
     <RoleGuard roles={["TEACHER"]}>
-      <DashboardShell> {children}</DashboardShell>
+      <DashboardShell>{children}</DashboardShell>
     </RoleGuard>
   );
 }

@@ -1,3 +1,5 @@
-export default function InstitutionAdminProfilePage() {
-  return <div>This is institution admin profile</div>;
+import ProfilePage from "@/components/modules/profile/ProfilePage";
+
+export default function InstitutionAdminDashboardPage() {
+  return <ProfilePage />;
 }

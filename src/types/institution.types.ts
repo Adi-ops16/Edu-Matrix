@@ -4,6 +4,7 @@ import type { createInstitutionSchema } from "@/schemas";
 export type InstitutionStatus = "PENDING" | "APPROVED" | "REJECTED";
 
 export interface Institution {
+  id: number;
   name: string;
   code: string;
   description: string;
@@ -14,7 +15,6 @@ export interface Institution {
   contact_email: string;
   contact_number: string;
   status: InstitutionStatus;
-  id: number;
   created_by: string;
   reviewed_by: string | null;
   created_at: Date;

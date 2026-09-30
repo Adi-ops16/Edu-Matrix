@@ -1,3 +1,5 @@
-export default function SuperAdminProfilePage() {
-  return <div>This is super admin profile</div>;
+import ProfilePage from "@/components/modules/profile/ProfilePage";
+
+export default function SuperAdminDashboardPage() {
+  return <ProfilePage />;
 }

@@ -36,7 +36,7 @@ export default function LogoutButton() {
       onClick={handleLogout}
       type="button"
       variant="ghost"
-      className="w-full justify-start text-muted-foreground bg-red-800 hover:bg-destructive/10 hover:text-destructive"
+      className="w-full justify-start text-red-600 border-red-600 hover:bg-red-600 hover:text-white dark:hover:bg-red-600"
     >
       <IconLogout aria-hidden="true" />
       Log out

@@ -2,15 +2,10 @@ import LogoutButton from "@/components/Buttons/LogoutButton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SidebarFooter } from "@/components/ui/sidebar";
 import type { UserProfile } from "@/types";
+import getInitials from "@/utils/getInitials";
 
 export default function DashboardFooter({ profile }: { profile: UserProfile }) {
-  const initials =
-    profile?.name
-      .trim()
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase())
-      .join("") || "U";
+  const initials = getInitials(profile?.name ?? "");
 
   return (
     <SidebarFooter className="gap-3 border-t p-4">

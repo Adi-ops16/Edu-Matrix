@@ -14,8 +14,12 @@ interface Props {
 
 export default function RoleGuard({ children, roles }: Props) {
   const router = useRouter();
-  const { data, isPending } = useGetProfile();
+  const { data, error, isError, isPending } = useGetProfile();
   const profile = data?.data;
+
+  if (isError) {
+    throw error;
+  }
 
   useEffect(() => {
     if (isPending) {

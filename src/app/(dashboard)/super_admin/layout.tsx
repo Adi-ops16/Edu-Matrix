@@ -9,7 +9,7 @@ export default function SuperAdminDashboardLayout({
 }) {
   return (
     <RoleGuard roles={["SUPER_ADMIN"]}>
-      <DashboardShell> {children}</DashboardShell>
+      <DashboardShell>{children}</DashboardShell>
     </RoleGuard>
   );
 }

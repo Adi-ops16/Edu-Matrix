@@ -1,3 +1,5 @@
+import AuthGuard from "@/components/authentication/AuthGuard";
+
 export default function Home() {
-  return <p>Page</p>;
+  return <AuthGuard redirectAuthenticatedUser />;
 }

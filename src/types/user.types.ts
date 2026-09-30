@@ -1,3 +1,11 @@
+import type z from "zod";
+import type {
+  studentProfileUpdateSchema,
+  teacherProfileUpdateSchema,
+  userProfileUpdateSchema,
+} from "@/schemas";
+import type { Institution } from "./institution.types";
+
 export type Role = "INSTITUTION_ADMIN" | "SUPER_ADMIN" | "STUDENT" | "TEACHER";
 
 export type Providers = "CREDENTIALS" | "GOOGLE";
@@ -55,6 +63,10 @@ export interface User {
   institution_id: number | null;
   created_at: string;
   updated_at: string;
+  institution: Omit<
+    Institution,
+    "created_by" | "reviewed_by" | "updated_at" | "id" | "created_at"
+  >;
 }
 
 type UserProfileBase = Omit<User, "role">;
@@ -75,3 +87,11 @@ export type UserProfile =
       student?: never;
       teacher?: never;
     });
+
+export type UserProfileUpdatePayload = z.infer<typeof userProfileUpdateSchema>;
+export type TeacherProfileUpdatePayload = z.infer<
+  typeof teacherProfileUpdateSchema
+>;
+export type StudentProfileUpdatePayload = z.infer<
+  typeof studentProfileUpdateSchema
+>;

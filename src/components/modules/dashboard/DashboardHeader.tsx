@@ -11,17 +11,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useGetProfile } from "@/hooks";
+import getInitials from "@/utils/getInitials";
 
 export function DashboardHeader() {
   const { data, isPending } = useGetProfile();
   const profile = data?.data;
-  const initials =
-    profile?.name
-      .trim()
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase())
-      .join("") || "U";
+  const initials = getInitials(profile?.name ?? "");
 
   return (
     <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">

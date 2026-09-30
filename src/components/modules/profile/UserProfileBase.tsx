@@ -1,0 +1,77 @@
+import {
+  IconCalendar,
+  IconCheck,
+  IconEdit,
+  IconId,
+  IconMail,
+  IconShieldCheck,
+} from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import type { UserProfile } from "@/types";
+import formatDate from "@/utils/formatDate";
+import Detail from "./ProfileItemDetail";
+
+const roleNames: Record<UserProfile["role"], string> = {
+  INSTITUTION_ADMIN: "Institution administrator",
+  STUDENT: "Student",
+  SUPER_ADMIN: "Super administrator",
+  TEACHER: "Teacher",
+};
+
+export default function UserProfileBase({ profile }: { profile: UserProfile }) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Personal details</CardTitle>
+        <CardDescription>
+          Your account and membership information
+        </CardDescription>
+        <CardAction>
+          <Button type="button" variant="outline" size="sm">
+            <IconEdit aria-hidden="true" />
+            Edit
+          </Button>
+        </CardAction>
+      </CardHeader>
+      <Separator />
+      <CardContent className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+        <Detail icon={IconId} label="Name" value={profile.name} />
+        <Detail icon={IconMail} label="Email" value={profile.email} />
+        <Detail
+          icon={IconShieldCheck}
+          label="Role"
+          value={roleNames[profile.role]}
+        />
+        <Detail
+          icon={IconCheck}
+          label="Email verification"
+          value={profile.is_verified ? "Verified" : "Not verified"}
+        />
+        <Detail
+          icon={IconShieldCheck}
+          label="Account status"
+          value={profile.user_status === "ACTIVE" ? "Active" : "Restricted"}
+        />
+        <Detail
+          icon={IconCalendar}
+          label="Member since"
+          value={formatDate(profile.created_at)}
+        />
+        <Detail
+          icon={IconCalendar}
+          label="Last updated"
+          value={formatDate(profile.updated_at)}
+        />
+      </CardContent>
+    </Card>
+  );
+}

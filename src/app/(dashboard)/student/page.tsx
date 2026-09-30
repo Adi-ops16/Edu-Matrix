@@ -1,3 +1,5 @@
-export default function StudentProfilePage() {
-  return <div>This is student profile</div>;
+import ProfilePage from "@/components/modules/profile/ProfilePage";
+
+export default function StudentDashboardPage() {
+  return <ProfilePage />;
 }

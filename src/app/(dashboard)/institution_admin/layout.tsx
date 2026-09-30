@@ -9,7 +9,7 @@ export default function InstitutionAdminDashboardLayout({
 }) {
   return (
     <RoleGuard roles={["INSTITUTION_ADMIN"]}>
-      <DashboardShell> {children}</DashboardShell>
+      <DashboardShell>{children}</DashboardShell>
     </RoleGuard>
   );
 }

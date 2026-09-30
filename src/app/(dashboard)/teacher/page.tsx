@@ -1,3 +1,5 @@
-export default function TeacherProfilePage() {
-  return <div>This is teacher profile</div>;
+import ProfilePage from "@/components/modules/profile/ProfilePage";
+
+export default function TeacherDashboardPage() {
+  return <ProfilePage />;
 }
