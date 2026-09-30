@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import RoleGuard from "@/components/authentication/RoleGuard";
 import DashboardShell from "@/components/modules/dashboard/DashboardShell";
 
 export default function StudentDashboardLayout({
@@ -7,8 +8,8 @@ export default function StudentDashboardLayout({
   children: ReactNode;
 }) {
   return (
-    <div>
-      <DashboardShell> {children}</DashboardShell>
-    </div>
+    <RoleGuard roles={["STUDENT"]}>
+      <DashboardShell>{children}</DashboardShell>
+    </RoleGuard>
   );
 }
