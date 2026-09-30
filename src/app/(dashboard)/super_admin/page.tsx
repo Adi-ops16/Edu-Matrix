@@ -1,3 +1,3 @@
-export default function SuperAdminDashboardPage() {
-  return <div>Super admin</div>;
+export default function SuperAdminProfilePage() {
+  return <div>This is super admin profile</div>;
 }

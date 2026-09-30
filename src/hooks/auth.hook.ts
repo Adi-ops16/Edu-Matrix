@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { login, register, verifyEmail } from "@/api";
+import { login, logout, register, verifyEmail } from "@/api";
 
 export const useLogin = () => {
   return useMutation({
@@ -16,5 +16,10 @@ export const useRegister = () => {
 export const useVerifyEmail = () => {
   return useMutation({
     mutationFn: verifyEmail,
+  });
+};
+export const useLogout = () => {
+  return useMutation({
+    mutationFn: logout,
   });
 };

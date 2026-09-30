@@ -1,15 +1,26 @@
 import { IconBookFilled, IconUser } from "@tabler/icons-react";
+import type { Route } from "@/types";
 
 const prefix = "/student";
-export const studentRoutes = [
+export const studentRoutes: Route[] = [
   {
     title: "Profile",
-    url: `${prefix}`,
-    icon: IconUser,
+    items: [
+      {
+        title: "Profile",
+        url: `${prefix}`,
+        icon: IconUser,
+      },
+    ],
   },
   {
-    title: "My courses",
-    url: `${prefix}/courses`,
-    icon: IconBookFilled,
+    title: "Academics",
+    items: [
+      {
+        title: "My courses",
+        url: `${prefix}/courses`,
+        icon: IconBookFilled,
+      },
+    ],
   },
 ];

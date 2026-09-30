@@ -2,13 +2,13 @@ import type { ReactNode } from "react";
 import RoleGuard from "@/components/authentication/RoleGuard";
 import DashboardShell from "@/components/modules/dashboard/DashboardShell";
 
-export default function SuperAdminDashboardLayout({
+export default function InstitutionAdminDashboardLayout({
   children,
 }: {
   children: ReactNode;
 }) {
   return (
-    <RoleGuard roles={["SUPER_ADMIN"]}>
+    <RoleGuard roles={["INSTITUTION_ADMIN"]}>
       <DashboardShell> {children}</DashboardShell>
     </RoleGuard>
   );

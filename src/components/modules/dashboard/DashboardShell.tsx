@@ -3,6 +3,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
 import { DashboardHeader } from "./DashboardHeader";
 import { DashboardSidebar } from "./DashboardSidebar";
+import SidebarSkeleton from "./SidebarSkeleton";
 
 export default function DashboardShell({ children }: { children: ReactNode }) {
   return (
@@ -14,11 +15,15 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
         } as React.CSSProperties
       }
     >
-      <DashboardSidebar variant="sidebar" />
+      <Suspense fallback={<SidebarSkeleton variant="sidebar" />}>
+        <DashboardSidebar variant="sidebar" />
+      </Suspense>
+
       <SidebarInset>
         <Suspense fallback={<Spinner />}>
           <DashboardHeader />
         </Suspense>
+
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
             {children}

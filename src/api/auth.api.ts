@@ -37,3 +37,9 @@ export const verifyEmail = (payload: verifyEmailPayload) => {
     body: payload,
   });
 };
+
+export const logout = () => {
+  return apiClient<ApiResponse<undefined>>(`${prefix}/logout`, {
+    method: "POST",
+  });
+};
