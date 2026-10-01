@@ -5,11 +5,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import type { FetchError } from "ofetch";
 import { useState } from "react";
 import { useVerifyEmail } from "@/hooks";
+import triggerToast from "@/utils/triggerToast";
 import { Button } from "../ui/button";
 import { FieldError } from "../ui/field";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { Spinner } from "../ui/spinner";
-import { toast } from "../ui/toast";
 
 export default function VerifyEmail() {
   const [otp, setOtp] = useState("");
@@ -50,7 +50,7 @@ export default function VerifyEmail() {
           setIsInvalid(true);
           setErrmessage(res.message);
         }
-        toast.add({
+        triggerToast({
           type: "success",
           title: "Verification successful",
           description:

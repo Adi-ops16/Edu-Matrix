@@ -11,13 +11,13 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Spinner } from "@/components/ui/spinner";
-import { toast } from "@/components/ui/toast";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useApplyForInstitution, useGetInstitutions } from "@/hooks";
+import triggerToast from "@/utils/triggerToast";
 import {
   Select,
   SelectContent,
@@ -63,13 +63,13 @@ export default function SelectInstitutionForm() {
     apply(data, {
       onSuccess: (res) => {
         if (!res.success) {
-          toast.add({
+          triggerToast({
             type: "error",
             title: "Failed to apply",
             description: res.message || "Internal Server error",
           });
         }
-        toast.add({
+        triggerToast({
           type: "success",
           title: "Applied successfully",
           description:
@@ -79,7 +79,7 @@ export default function SelectInstitutionForm() {
       },
       onError: (err: FetchError) => {
         const message = err.data?.message;
-        toast.add({
+        triggerToast({
           type: "error",
           title: "Error while applying",
           description: message || "Internal Server Error",

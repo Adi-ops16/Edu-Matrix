@@ -1,13 +1,12 @@
 import {
   IconCalendar,
-  IconEdit,
   IconExternalLink,
   IconGenderBigender,
   IconMapPin,
   IconPhone,
   IconSchool,
 } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
+import StudentProfileEditModal from "@/components/modals/StudentProfileEditModal";
 import {
   Card,
   CardAction,
@@ -31,10 +30,7 @@ export default function StudentProfile({
         <CardTitle>Student details</CardTitle>
         <CardDescription>Academic and personal information</CardDescription>
         <CardAction>
-          <Button type="button" variant="outline" size="sm">
-            <IconEdit aria-hidden="true" />
-            Edit
-          </Button>
+          <StudentProfileEditModal student={student} />
         </CardAction>
       </CardHeader>
       <CardContent>

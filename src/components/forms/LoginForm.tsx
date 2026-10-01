@@ -20,9 +20,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { useLogin } from "@/hooks";
 import { loginSchema } from "@/schemas";
+import triggerToast from "@/utils/triggerToast";
 import GoogleAuthButton from "../Buttons/GoogleAuthButton";
 import { Spinner } from "../ui/spinner";
-import { toast } from "../ui/toast";
 
 export function LoginForm({
   className,
@@ -49,13 +49,13 @@ export function LoginForm({
       login(data, {
         onSuccess: (res) => {
           if (!res.success) {
-            toast.add({
+            triggerToast({
               type: "error",
               title: "Login Failure",
               description: res.message || "Internal Server error",
             });
           }
-          toast.add({
+          triggerToast({
             type: "success",
             title: "Login Successful",
             description: "Welcome back to edu-matrix",
@@ -70,7 +70,7 @@ export function LoginForm({
         },
         onError: (err: FetchError) => {
           const message = err.data?.message;
-          toast.add({
+          triggerToast({
             type: "error",
             title: "Error while login",
             description: message || "Internal Server Error",

@@ -1,12 +1,13 @@
+"use client";
+
 import {
   IconCalendar,
   IconCheck,
-  IconEdit,
   IconId,
   IconMail,
   IconShieldCheck,
 } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
+import UserProfileEditModal from "@/components/modals/UserProfileEditModal";
 import {
   Card,
   CardAction,
@@ -36,10 +37,7 @@ export default function UserProfileBase({ profile }: { profile: UserProfile }) {
           Your account and membership information
         </CardDescription>
         <CardAction>
-          <Button type="button" variant="outline" size="sm">
-            <IconEdit aria-hidden="true" />
-            Edit
-          </Button>
+          <UserProfileEditModal profile={profile} />
         </CardAction>
       </CardHeader>
       <Separator />

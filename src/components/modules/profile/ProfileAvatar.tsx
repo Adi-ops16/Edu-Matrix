@@ -6,10 +6,10 @@ import type { FetchError } from "ofetch";
 import { type ChangeEvent, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { toast } from "@/components/ui/toast";
 import { useUpdateProfilePicture } from "@/hooks";
 import type { UserProfile } from "@/types";
 import getInitials from "@/utils/getInitials";
+import triggerToast from "@/utils/triggerToast";
 
 export default function ProfileAvatar({ profile }: { profile: UserProfile }) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,7 +40,7 @@ export default function ProfileAvatar({ profile }: { profile: UserProfile }) {
   const handleUpdatePicture = () => {
     update(selectedImage as File, {
       onSuccess: (res) => {
-        toast.add({
+        triggerToast({
           type: "success",
           title: "Profile picture updated",
           description:
@@ -52,7 +52,7 @@ export default function ProfileAvatar({ profile }: { profile: UserProfile }) {
       },
       onError: (error: FetchError) => {
         const message = error.data?.message;
-        toast.add({
+        triggerToast({
           type: "error",
           title: "Update failed",
           description:

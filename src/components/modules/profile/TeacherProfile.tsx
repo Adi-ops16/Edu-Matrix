@@ -1,14 +1,13 @@
 import {
   IconCalendar,
   IconCertificate,
-  IconEdit,
   IconExternalLink,
   IconGenderBigender,
   IconMapPin,
   IconPhone,
   IconSchool,
 } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
+import TeacherProfileEditModal from "@/components/modals/TeacherProfileEditModal";
 import {
   Card,
   CardAction,
@@ -32,10 +31,7 @@ export default function TeacherProfile({
         <CardTitle>Teaching details</CardTitle>
         <CardDescription>Professional and personal information</CardDescription>
         <CardAction>
-          <Button type="button" variant="outline" size="sm">
-            <IconEdit aria-hidden="true" />
-            Edit
-          </Button>
+          <TeacherProfileEditModal teacher={teacher} />
         </CardAction>
       </CardHeader>
       <CardContent>

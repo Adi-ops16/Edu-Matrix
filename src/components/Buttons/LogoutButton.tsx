@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import type { FetchError } from "ofetch";
 import { Button } from "@/components/ui/button";
 import { useLogout } from "@/hooks";
-import { toast } from "../ui/toast";
+import triggerToast from "@/utils/triggerToast";
 
 export default function LogoutButton() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function LogoutButton() {
   const handleLogout = () => {
     logout(undefined, {
       onSuccess: () => {
-        toast.add({
+        triggerToast({
           type: "success",
           title: "Logged out",
           description: "You have been logged out successfully.",
@@ -22,7 +22,7 @@ export default function LogoutButton() {
       },
       onError: (error: FetchError) => {
         const message = error.data?.message;
-        toast.add({
+        triggerToast({
           type: "error",
           title: "Logout failed",
           description: message || "An error occurred while logging out.",

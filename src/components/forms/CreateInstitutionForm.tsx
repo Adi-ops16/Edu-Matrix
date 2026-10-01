@@ -13,9 +13,9 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/toast";
 import { useCreateInstitution } from "@/hooks";
 import { createInstitutionSchema } from "@/schemas";
+import triggerToast from "@/utils/triggerToast";
 import { Spinner } from "../ui/spinner";
 
 export default function CreateInstitutionForm() {
@@ -46,13 +46,13 @@ export default function CreateInstitutionForm() {
       create(institution, {
         onSuccess: (res) => {
           if (!res.success) {
-            toast.add({
+            triggerToast({
               type: "error",
               title: "Failed to create institution",
               description: res.message || "Internal Server error",
             });
           }
-          toast.add({
+          triggerToast({
             type: "success",
             title: "Institution created successfully",
             description:
@@ -62,7 +62,7 @@ export default function CreateInstitutionForm() {
         },
         onError: (err: FetchError) => {
           const message = err.data?.message;
-          toast.add({
+          triggerToast({
             type: "error",
             title: "Error while creating institution",
             description: message || "Internal Server Error",

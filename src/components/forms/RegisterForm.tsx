@@ -26,9 +26,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRegister } from "@/hooks";
 import { registerSchema } from "@/schemas";
+import triggerToast from "@/utils/triggerToast";
 import GoogleAuthButton from "../Buttons/GoogleAuthButton";
 import { Spinner } from "../ui/spinner";
-import { toast } from "../ui/toast";
 
 export function RegisterForm({
   className,
@@ -67,13 +67,13 @@ export function RegisterForm({
         {
           onSuccess: (res) => {
             if (!res.success) {
-              toast.add({
+              triggerToast({
                 type: "error",
                 title: "Registration Failure",
                 description: res.message || "Internal Server error",
               });
             }
-            toast.add({
+            triggerToast({
               type: "success",
               title: "Verify your email",
               description:
@@ -85,7 +85,7 @@ export function RegisterForm({
           },
           onError: (err: FetchError) => {
             const message = err.data?.message;
-            toast.add({
+            triggerToast({
               type: "error",
               title: "Error occurred during registration",
               description: message || "Internal Server Error",
