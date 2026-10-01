@@ -9,3 +9,13 @@ export default function formatDate(value: string | null) {
         day: "numeric",
       });
 }
+
+export function formatTimestamp(value: Date) {
+  const date = value instanceof Date ? value : new Date(String(value));
+  return Number.isNaN(date.getTime())
+    ? "Not provided"
+    : date.toLocaleString(undefined, {
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
+}

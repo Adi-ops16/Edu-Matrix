@@ -49,3 +49,13 @@ export const createInstitutionSchema = z.object({
     .min(7, "contact number must be at least 7 characters")
     .max(20, "contact number must be at most 20 characters"),
 });
+
+export const institutionReviewSchema = z.object({
+  institution_id: z
+    .number("Invalid id: institution_id must be a number")
+    .int("institution_id must be an integer"),
+  status: z.enum(
+    ["APPROVED", "REJECTED"],
+    "invalid enum: status must be a valid enum",
+  ),
+});

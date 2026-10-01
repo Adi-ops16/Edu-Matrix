@@ -4,12 +4,19 @@ import type {
   ApplyForInstitutionPayload,
   CreateInstitutionPayload,
   Institution,
+  ReviewInstitutionPayload,
 } from "@/types";
 
 const prefix = "/institution";
 
 export const getInstitutions = () => {
   return apiClient<ApiResponse<Institution[]>>(`${prefix}/institutions`);
+};
+
+export const getInstitutionApplications = () => {
+  return apiClient<ApiResponse<Institution[]>>(
+    `${prefix}/institution-applications`,
+  );
 };
 
 export const applyForInstitution = (payload: ApplyForInstitutionPayload) => {
@@ -27,4 +34,14 @@ export const createInstitution = (payload: CreateInstitutionPayload) => {
     method: "POST",
     body: payload,
   });
+};
+
+export const reviewInstitution = (payload: ReviewInstitutionPayload) => {
+  return apiClient<ApiResponse<Institution>>(
+    `${prefix}/institution-application-review`,
+    {
+      method: "PATCH",
+      body: payload,
+    },
+  );
 };

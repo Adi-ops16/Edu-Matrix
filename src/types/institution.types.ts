@@ -1,5 +1,8 @@
 import type z from "zod";
-import type { createInstitutionSchema } from "@/schemas";
+import type {
+  createInstitutionSchema,
+  institutionReviewSchema,
+} from "@/schemas";
 
 export type InstitutionStatus = "PENDING" | "APPROVED" | "REJECTED";
 
@@ -27,3 +30,4 @@ export type ApplyForInstitutionPayload = {
 };
 
 export type CreateInstitutionPayload = z.infer<typeof createInstitutionSchema>;
+export type ReviewInstitutionPayload = z.infer<typeof institutionReviewSchema>;

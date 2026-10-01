@@ -69,6 +69,7 @@ export function DashboardSidebar({
                     <SidebarMenu key={`${i.title}-${i.url}`}>
                       <SidebarMenuItem>
                         <SidebarMenuButton
+                          className="mb-1"
                           render={<Link href={i.url} />}
                           isActive={isActive}
                         >
