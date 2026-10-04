@@ -15,6 +15,7 @@ import {
   reviewInstitution,
   reviewJoiningApplications,
 } from "@/api";
+import type { Query } from "@/types";
 
 export const useGetInstitutions = () => {
   return useQuery({
@@ -79,16 +80,16 @@ export const useReviewInstitution = () => {
   });
 };
 
-export const useGetInstitutionStudents = () => {
+export const useGetInstitutionStudents = (query: Query) => {
   return useSuspenseQuery({
-    queryKey: ["students"],
-    queryFn: getInstitutionStudents,
+    queryKey: ["students", query],
+    queryFn: () => getInstitutionStudents(query),
   });
 };
 
-export const useGetInstitutionTeachers = () => {
+export const useGetInstitutionTeachers = (query: Query) => {
   return useSuspenseQuery({
-    queryKey: ["teachers"],
-    queryFn: getInstitutionTeachers,
+    queryKey: ["teachers", query],
+    queryFn: () => getInstitutionTeachers(query),
   });
 };

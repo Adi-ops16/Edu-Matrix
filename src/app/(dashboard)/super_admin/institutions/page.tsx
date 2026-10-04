@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import InstitutionTable from "@/components/modules/institutions/InstitutionTable";
+import InstitutionTable from "@/components/modules/institution/institutions/InstitutionTable";
 import TableSkeleton from "@/components/shared/TableSkeleton";
 
 export default function InstitutionsPage() {

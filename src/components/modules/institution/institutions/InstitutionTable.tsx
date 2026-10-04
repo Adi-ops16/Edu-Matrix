@@ -1,6 +1,5 @@
 "use client";
 
-import InstitutionDetailsDialog from "@/components/modules/institutions/InstitutionDetailsDialog";
 import {
   Table,
   TableBody,
@@ -11,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { useGetInstitutionsSuspense } from "@/hooks";
 import type { Institution } from "@/types";
+import InstitutionDetailsDialog from "./InstitutionDetailsDialog";
 
 const statusStyles: Record<Institution["status"], string> = {
   APPROVED: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",

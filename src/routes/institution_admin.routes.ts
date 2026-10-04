@@ -1,4 +1,8 @@
-import { IconUser } from "@tabler/icons-react";
+import {
+  IconChalkboardTeacher,
+  IconUser,
+  IconUsers,
+} from "@tabler/icons-react";
 import type { Route } from "@/types";
 
 const prefix = "/institution_admin";
@@ -21,6 +25,16 @@ export const institutionAdminRoutes: Route[] = [
         title: "Applications",
         url: `${prefix}/applications`,
         icon: IconUser,
+      },
+      {
+        title: "Students",
+        url: `${prefix}/students`,
+        icon: IconUsers,
+      },
+      {
+        title: "Teachers",
+        url: `${prefix}/teachers`,
+        icon: IconChalkboardTeacher,
       },
     ],
   },

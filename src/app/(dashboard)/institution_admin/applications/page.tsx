@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import JoiningApplication from "@/components/modules/pending-applications/JoiningApplication";
+import JoiningApplication from "@/components/modules/institution/pending-applications/JoiningApplication";
 import TableSkeleton from "@/components/shared/TableSkeleton";
 
 export default function ApplicationsPage() {

@@ -6,6 +6,7 @@ import type {
   Institution,
   InstitutionStudents,
   InstitutionTeachers,
+  Query,
   ReviewInstitutionPayload,
   ReviewJoiningInstitutionPayload,
   User,
@@ -50,12 +51,16 @@ export const getInstitutionApplications = () => {
   );
 };
 
-export const getInstitutionStudents = () => {
-  return apiClient<ApiResponse<InstitutionStudents[]>>(`${prefix}/students`);
+export const getInstitutionStudents = (query: Query) => {
+  return apiClient<ApiResponse<InstitutionStudents[]>>(`${prefix}/students`, {
+    params: query,
+  });
 };
 
-export const getInstitutionTeachers = () => {
-  return apiClient<ApiResponse<InstitutionTeachers[]>>(`${prefix}/teachers`);
+export const getInstitutionTeachers = (query: Query) => {
+  return apiClient<ApiResponse<InstitutionTeachers[]>>(`${prefix}/teachers`, {
+    query,
+  });
 };
 
 export const createInstitution = (payload: CreateInstitutionPayload) => {

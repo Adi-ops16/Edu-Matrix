@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import ApplicationTable from "@/components/modules/institution-applications/ApplicationTable";
+import ApplicationTable from "@/components/modules/institution/institution-applications/ApplicationTable";
 import TableSkeleton from "@/components/shared/TableSkeleton";
 
 export default function InstitutionApplicationsPage() {

@@ -11,3 +11,14 @@ export interface Meta {
   total?: number;
   totalPages?: number;
 }
+
+export interface Query {
+  searchTerm?: string;
+  page?: string;
+  limit?: string;
+  sortOrder?: string;
+  sortBy?: string;
+
+  // biome-ignore lint/suspicious/noExplicitAny: <flexible query params>
+  [key: string]: any;
+}
