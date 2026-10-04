@@ -8,8 +8,12 @@ import {
   applyForInstitution,
   createInstitution,
   getInstitutionApplications,
+  getInstitutionStudents,
   getInstitutions,
+  getInstitutionTeachers,
+  getJoiningApplications,
   reviewInstitution,
+  reviewJoiningApplications,
 } from "@/api";
 
 export const useGetInstitutions = () => {
@@ -33,6 +37,25 @@ export const useGetInstitutionApplications = () => {
   });
 };
 
+export const useGetJoiningApplications = () => {
+  return useSuspenseQuery({
+    queryKey: ["joining-application"],
+    queryFn: getJoiningApplications,
+  });
+};
+
+export const useReviewJoiningApplications = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: reviewJoiningApplications,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["joining-application"] });
+      queryClient.invalidateQueries({ queryKey: ["teachers"] });
+      queryClient.invalidateQueries({ queryKey: ["students"] });
+    },
+  });
+};
+
 export const useApplyForInstitution = () => {
   return useMutation({
     mutationFn: applyForInstitution,
@@ -44,6 +67,7 @@ export const useCreateInstitution = () => {
     mutationFn: createInstitution,
   });
 };
+
 export const useReviewInstitution = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -52,5 +76,19 @@ export const useReviewInstitution = () => {
       queryClient.invalidateQueries({ queryKey: ["institution-application"] });
       queryClient.invalidateQueries({ queryKey: ["institutions"] });
     },
+  });
+};
+
+export const useGetInstitutionStudents = () => {
+  return useSuspenseQuery({
+    queryKey: ["students"],
+    queryFn: getInstitutionStudents,
+  });
+};
+
+export const useGetInstitutionTeachers = () => {
+  return useSuspenseQuery({
+    queryKey: ["teachers"],
+    queryFn: getInstitutionTeachers,
   });
 };

@@ -61,7 +61,9 @@ export default function ProfilePage() {
       {profile.role === "TEACHER" && (
         <TeacherProfile teacher={profile.teacher} />
       )}
-      <InstitutionProfile profile={profile} />
+      {profile.role !== "SUPER_ADMIN" && (
+        <InstitutionProfile profile={profile} />
+      )}
     </section>
   );
 }

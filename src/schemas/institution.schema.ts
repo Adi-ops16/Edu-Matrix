@@ -59,3 +59,8 @@ export const institutionReviewSchema = z.object({
     "invalid enum: status must be a valid enum",
   ),
 });
+
+export const reviewJoiningApplicationSchema = z.object({
+  user_id: z.uuid("Invalid uuid"),
+  membership_status: z.enum(["APPROVED", "DECLINED"]),
+});

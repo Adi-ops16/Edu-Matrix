@@ -14,4 +14,14 @@ export const institutionAdminRoutes: Route[] = [
       },
     ],
   },
+  {
+    title: "Institution Management",
+    items: [
+      {
+        title: "Applications",
+        url: `${prefix}/applications`,
+        icon: IconUser,
+      },
+    ],
+  },
 ];

@@ -63,7 +63,7 @@ export interface User {
   institution_id: number | null;
   created_at: string;
   updated_at: string;
-  institution: Omit<
+  institution?: Omit<
     Institution,
     "created_by" | "reviewed_by" | "updated_at" | "id" | "created_at"
   >;
