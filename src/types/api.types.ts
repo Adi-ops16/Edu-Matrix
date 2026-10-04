@@ -14,8 +14,8 @@ export interface Meta {
 
 export interface Query {
   searchTerm?: string;
-  page?: string;
-  limit?: string;
+  page?: number;
+  limit?: number;
   sortOrder?: string;
   sortBy?: string;
 
