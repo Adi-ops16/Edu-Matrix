@@ -1,7 +1,9 @@
 import {
+  IconBuilding,
   IconChalkboardTeacher,
   IconUser,
   IconUsers,
+  IconWritingFilled,
 } from "@tabler/icons-react";
 import type { Route } from "@/types";
 
@@ -35,6 +37,21 @@ export const institutionAdminRoutes: Route[] = [
         title: "Teachers",
         url: `${prefix}/teachers`,
         icon: IconChalkboardTeacher,
+      },
+    ],
+  },
+  {
+    title: "Department Management",
+    items: [
+      {
+        title: "Departments",
+        url: `${prefix}/departments`,
+        icon: IconBuilding,
+      },
+      {
+        title: "Create Department",
+        url: `${prefix}/create-department`,
+        icon: IconWritingFilled,
       },
     ],
   },

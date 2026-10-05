@@ -17,7 +17,9 @@ function Detail({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="grid grid-cols-[minmax(7rem,0.8fr)_1.2fr] gap-4 border-b py-3 last:border-0">
       <dt className="text-sm text-muted-foreground">{label}</dt>
-      <dd className="min-w-0 break-words text-sm font-medium">{children}</dd>
+      <dd className="min-w-0 wrap-break-word text-sm font-medium">
+        {children}
+      </dd>
     </div>
   );
 }
