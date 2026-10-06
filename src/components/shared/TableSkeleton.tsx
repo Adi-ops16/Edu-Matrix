@@ -17,7 +17,7 @@ export default function TableSkeleton({
   rows?: number;
 }) {
   return (
-    <div className="overflow-hidden rounded-lg border">
+    <div className="overflow-hidden rounded-lg border px-5 py-20">
       <Table>
         <TableHeader>
           <TableRow>

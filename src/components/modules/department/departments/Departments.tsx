@@ -12,7 +12,7 @@ import DepartmentsTable from "./DepartmentsTable";
 
 export default function Departments() {
   const { data, refetch } = useGetDepartments();
-  const departments = data.data ?? [];
+  const departments = data?.data?.departments ?? [];
 
   const [descriptionDepartment, setDescriptionDepartment] =
     useState<Department | null>(null);

@@ -43,3 +43,10 @@ export const updateDepartmentSchema = z.object({
     .max(new Date().getFullYear(), "Year cannot be in the future")
     .optional(),
 });
+
+export const reviewDepartmentApplicationSchema = z.object({
+  department_id: z.uuid("Invalid uuid"),
+  user_id: z.uuid("Invalid uuid"),
+  role: z.enum(["STUDENT", "TEACHER"], "Invalid role"),
+  status: z.enum(["APPROVED", "DECLINED"]),
+});

@@ -1,5 +1,6 @@
 import {
   IconBuilding,
+  IconBuildingPlus,
   IconChalkboardTeacher,
   IconUser,
   IconUsers,
@@ -52,6 +53,11 @@ export const institutionAdminRoutes: Route[] = [
         title: "Create Department",
         url: `${prefix}/create-department`,
         icon: IconWritingFilled,
+      },
+      {
+        title: "Department Joining applications",
+        url: `${prefix}/department-applications`,
+        icon: IconBuildingPlus,
       },
     ],
   },
