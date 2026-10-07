@@ -1,4 +1,6 @@
 import {
+  IconBook,
+  IconBookUpload,
   IconBuilding,
   IconBuildingPlus,
   IconChalkboardTeacher,
@@ -58,6 +60,21 @@ export const institutionAdminRoutes: Route[] = [
         title: "Department Joining applications",
         url: `${prefix}/department-applications`,
         icon: IconBuildingPlus,
+      },
+    ],
+  },
+  {
+    title: "Course Management",
+    items: [
+      {
+        title: "Courses",
+        url: `${prefix}/courses`,
+        icon: IconBook,
+      },
+      {
+        title: "Create Course",
+        url: `${prefix}/create-course`,
+        icon: IconBookUpload,
       },
     ],
   },

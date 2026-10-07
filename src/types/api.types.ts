@@ -16,7 +16,7 @@ export interface Query {
   searchTerm?: string;
   page?: number;
   limit?: number;
-  sortOrder?: string;
+  sortOrder?: "asc" | "desc";
   sortBy?: string;
 
   // biome-ignore lint/suspicious/noExplicitAny: <flexible query params>
