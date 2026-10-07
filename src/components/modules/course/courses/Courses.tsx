@@ -47,7 +47,8 @@ export default function Courses() {
             Courses
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Browse and manage courses offered by your institution.
+            Browse and {role === "STUDENT" ? "buy" : "manage"} courses offered
+            by your institution.
           </p>
         </div>
 

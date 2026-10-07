@@ -19,21 +19,18 @@ export const getCourses = (department_id: string, params?: Query) => {
   );
 };
 
-export const getCourseDetailsForAdmin = (
-  department_id: string,
-  params?: Query,
-) => {
+export const getCourseDetailsForAdmin = (courseId: string, params?: Query) => {
   return apiClient<ApiResponse<CourseDetails[]>>(
-    `${prefix}/admin/details/${department_id}`,
+    `${prefix}/admin/details/${courseId}`,
     {
       query: params,
     },
   );
 };
 
-export const getCourseDetailsForStudents = (department_id: string) => {
+export const getCourseDetailsForStudents = (courseId: string) => {
   return apiClient<ApiResponse<CourseDetailsStudent>>(
-    `${prefix}/details/${department_id}`,
+    `${prefix}/details/${courseId}`,
   );
 };
 

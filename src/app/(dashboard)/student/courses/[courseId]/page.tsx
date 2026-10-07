@@ -1,6 +1,6 @@
 import CourseDetails from "@/components/modules/course/course-details/CourseDetails";
 
-export default async function CourseDetailsPage({
+export default async function StudentCourseDetailsPage({
   params,
 }: {
   params: Promise<{ courseId: string }>;

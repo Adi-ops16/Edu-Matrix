@@ -28,7 +28,7 @@ export interface Course {
   course_details: CourseDetails | null;
 }
 
-export interface CourseDetailsStudent extends Course {
+export interface CourseDetailsStudent extends CourseDetails {
   department: Pick<
     Department,
     "code" | "department_description" | "department_established_year" | "name"
@@ -38,4 +38,8 @@ export interface CourseDetailsStudent extends Course {
     "certificate_url" | "degree" | "specialization"
   > &
     Pick<User, "name" | "profile_url">)[];
+  title: string;
+  code: string;
+  description: string;
+  learning_outcomes: string[];
 }

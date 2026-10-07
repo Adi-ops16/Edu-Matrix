@@ -15,22 +15,19 @@ export const useGetCourses = (departmentId: string, query: Query) => {
   });
 };
 
-export const useGetCourseDetailsForAdmin = (
-  departmentId: string,
-  query: Query,
-) => {
+export const useGetCourseDetailsForAdmin = (courseId: string, query: Query) => {
   return useQuery({
-    queryKey: ["course-details/admin", query, departmentId],
-    queryFn: () => getCourseDetailsForAdmin(departmentId, query),
-    enabled: Boolean(departmentId),
+    queryKey: ["course-details/admin", query, courseId],
+    queryFn: () => getCourseDetailsForAdmin(courseId, query),
+    enabled: Boolean(courseId),
   });
 };
 
-export const useGetCourseDetailsForStudents = (departmentId: string) => {
+export const useGetCourseDetailsForStudents = (courseId: string) => {
   return useQuery({
-    queryKey: ["course-details/students", departmentId],
-    queryFn: () => getCourseDetailsForStudents(departmentId),
-    enabled: Boolean(departmentId),
+    queryKey: ["course-details/students", courseId],
+    queryFn: () => getCourseDetailsForStudents(courseId),
+    enabled: Boolean(courseId),
   });
 };
 

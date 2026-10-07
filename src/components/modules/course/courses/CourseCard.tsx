@@ -20,6 +20,9 @@ interface Props {
 export default function CourseCard({ course, role }: Props) {
   const isAdmin = role === "INSTITUTION_ADMIN";
   const isStudent = role === "STUDENT";
+  const detailsHref = isStudent
+    ? `/student/courses/${course.id}`
+    : `/institution_admin/courses/${course.id}`;
   return (
     <Card className="h-full rounded-lg">
       <CardHeader>
@@ -72,7 +75,7 @@ export default function CourseCard({ course, role }: Props) {
 
       <CardFooter className="flex justify-end">
         {isAdmin && (
-          <Link href={`/institution_admin/courses/${course.id}`}>
+          <Link href={detailsHref}>
             <Button type="button" size="sm">
               <IconInfoCircle />
               Details
@@ -81,7 +84,7 @@ export default function CourseCard({ course, role }: Props) {
         )}
 
         {course.course_details && isStudent && (
-          <Link href={`/institution_admin/courses/${course.id}`}>
+          <Link href={detailsHref}>
             <Button type="button">
               <IconCash />
               Buy this course
