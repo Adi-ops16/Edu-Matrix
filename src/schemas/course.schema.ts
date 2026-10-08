@@ -52,3 +52,4 @@ export const assignTeacherToCourseSchema = z.object({
     .array(z.uuid("Invalid teacher ID"))
     .min(1, "At least one teacher must be provided"),
 });
+

@@ -9,7 +9,7 @@ import type { User } from "./user.types";
 
 export type TCreateCoursePayload = z.infer<typeof createCourseSchema>;
 export type CreateCoursePayload = Omit<TCreateCoursePayload, "include_details">;
-export type assignTeacherToCoursePayload = z.infer<
+export type AssignTeacherToCoursePayload = z.infer<
   typeof assignTeacherToCourseSchema
 >;
 
@@ -61,4 +61,9 @@ export interface MyCoursesResponse
     "code" | "department_description" | "department_established_year" | "name"
   >;
   course: Pick<Course, "learning_outcomes" | "title" | "description" | "code">;
+}
+
+export interface UpdateCourseStatusPayload {
+  course_details_id: number;
+  status: "ONGOING" | "COMPLETED";
 }

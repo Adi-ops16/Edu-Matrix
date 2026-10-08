@@ -1,13 +1,14 @@
 import apiClient from "@/lib/ofetch";
 import type {
   ApiResponse,
-  assignTeacherToCoursePayload,
+  AssignTeacherToCoursePayload,
   Course,
   CourseDetails,
   CourseDetailsStudent,
   CreateCoursePayload,
   MyCoursesResponse,
   Query,
+  UpdateCourseStatusPayload,
 } from "@/types";
 
 const prefix = "/course";
@@ -48,9 +49,16 @@ export const createCourse = (payload: CreateCoursePayload) => {
 };
 
 export const assignTeacherToCourse = (
-  payload: assignTeacherToCoursePayload,
+  payload: AssignTeacherToCoursePayload,
 ) => {
   return apiClient(`${prefix}/assign-teacher`, {
+    method: "PATCH",
+    body: payload,
+  });
+};
+
+export const updateCourseStatus = (payload: UpdateCourseStatusPayload) => {
+  return apiClient<ApiResponse<unknown>>(`${prefix}/update-status`, {
     method: "PATCH",
     body: payload,
   });

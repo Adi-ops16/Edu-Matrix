@@ -1,5 +1,6 @@
 "use client";
 
+import type { FetchError } from "ofetch";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,8 +19,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetCourseDetailsForAdmin } from "@/hooks";
+import { useGetCourseDetailsForAdmin, useUpdateCourseStatus } from "@/hooks";
 import formatDate from "@/utils/formatDate";
+import triggerToast from "@/utils/triggerToast";
 import CourseDetailsSheet from "./CourseDetailsSheet";
 
 export default function AdminCourseDetailsTable({
@@ -27,6 +29,9 @@ export default function AdminCourseDetailsTable({
 }: {
   courseId: string;
 }) {
+  const [updatingCourseDetailsId, setUpdatingCourseDetailsId] = useState<
+    number | null
+  >(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const {
     data: response,
@@ -38,6 +43,49 @@ export default function AdminCourseDetailsTable({
     sortOrder,
   });
   const courseDetails = response?.data ?? [];
+
+  const { mutate: update } = useUpdateCourseStatus();
+
+  const handleReview = ({
+    status,
+    course_details_id,
+  }: {
+    course_details_id: number;
+    status: "ONGOING" | "COMPLETED";
+  }) => {
+    setUpdatingCourseDetailsId(course_details_id);
+    update(
+      { status, course_details_id },
+      {
+        onSuccess: (res) => {
+          if (!res.success) {
+            triggerToast({
+              type: "error",
+              title: "Course status update failed",
+              description: res.message || "Please try again.",
+            });
+            return;
+          }
+
+          triggerToast({
+            type: "success",
+            title: "Course status updated",
+            description: res.message || "Your profile has been updated.",
+          });
+        },
+        onError: (error: FetchError) => {
+          triggerToast({
+            type: "error",
+            title: "Course status update failed",
+            description: error.data?.message || "Internal Server Error",
+          });
+        },
+        onSettled: () => {
+          setUpdatingCourseDetailsId(null);
+        },
+      },
+    );
+  };
 
   return (
     <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
@@ -116,35 +164,61 @@ export default function AdminCourseDetailsTable({
                 </TableCell>
               </TableRow>
             ) : (
-              courseDetails.map((details) => (
-                <TableRow key={details.id}>
-                  <TableCell className="font-medium">
-                    {details.semester}
-                  </TableCell>
-                  <TableCell>{details.batch}</TableCell>
-                  <TableCell>
-                    {formatDate(details.start_date) || "Not set"}
-                  </TableCell>
-                  <TableCell>
-                    <span className="rounded-md bg-muted px-2 py-1 text-xs font-medium">
-                      {details.status.toLowerCase()}
-                    </span>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex flex-wrap justify-end gap-2">
-                      <CourseDetailsSheet details={details} />
-                      {details.status === "UPCOMING" && (
-                        <Button size="sm" variant="secondary">
-                          Mark as Ongoing
-                        </Button>
-                      )}
-                      {details.status === "ONGOING" && (
-                        <Button size="sm">Mark as Completed</Button>
-                      )}
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))
+              courseDetails.map((details) => {
+                const isUpdating = updatingCourseDetailsId === details.id;
+                return (
+                  <TableRow key={details.id}>
+                    <TableCell className="font-medium">
+                      {details.semester}
+                    </TableCell>
+                    <TableCell>{details.batch}</TableCell>
+                    <TableCell>
+                      {formatDate(details.start_date) || "Not set"}
+                    </TableCell>
+                    <TableCell>
+                      <span className="rounded-md bg-muted px-2 py-1 text-xs font-medium">
+                        {details.status.toLowerCase()}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex flex-wrap justify-end gap-2">
+                        <CourseDetailsSheet details={details} />
+                        {details.status === "UPCOMING" && (
+                          <Button
+                            size="sm"
+                            disabled={isUpdating}
+                            variant="secondary"
+                            onClick={() => {
+                              handleReview({
+                                status: "ONGOING",
+                                course_details_id: details.id,
+                              });
+                            }}
+                          >
+                            {isUpdating && <Spinner />}
+                            Mark as Ongoing
+                          </Button>
+                        )}
+                        {details.status === "ONGOING" && (
+                          <Button
+                            onClick={() => {
+                              handleReview({
+                                status: "COMPLETED",
+                                course_details_id: details.id,
+                              });
+                            }}
+                            size="sm"
+                            disabled={isUpdating}
+                          >
+                            {!!isUpdating && <Spinner />}
+                            Mark as Completed
+                          </Button>
+                        )}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })
             )}
           </TableBody>
         </Table>

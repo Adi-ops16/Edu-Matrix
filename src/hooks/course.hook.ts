@@ -6,6 +6,7 @@ import {
   getCourseDetailsForStudents,
   getCourses,
   getMyCourses,
+  updateCourseStatus,
 } from "@/api";
 import type { Query } from "@/types";
 
@@ -58,6 +59,17 @@ export const useAssignTeacherToCourse = () => {
       queryClient.invalidateQueries({ queryKey: ["course-details/admin"] });
       queryClient.invalidateQueries({ queryKey: ["course-details/students"] });
       queryClient.invalidateQueries({ queryKey: ["courses"] });
+      queryClient.invalidateQueries({ queryKey: ["teachers-assign"] });
+    },
+  });
+};
+
+export const useUpdateCourseStatus = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateCourseStatus,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["course-details/admin"] });
     },
   });
 };
