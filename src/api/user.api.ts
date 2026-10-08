@@ -1,8 +1,6 @@
 import apiClient from "@/lib/ofetch";
 import type {
   ApiResponse,
-  StudentProfileUpdatePayload,
-  TeacherProfileUpdatePayload,
   UserProfile,
   UserProfileUpdatePayload,
 } from "@/types";
@@ -27,28 +25,5 @@ export const updateUserProfile = (payload: UserProfileUpdatePayload) => {
   return apiClient<ApiResponse<UserProfile>>(`${prefix}/profile`, {
     method: "PATCH",
     body: payload,
-  });
-};
-
-export const updateStudentProfile = (payload: StudentProfileUpdatePayload) => {
-  return apiClient<ApiResponse<UserProfile>>(`/student/profile-update`, {
-    method: "PATCH",
-    body: payload,
-  });
-};
-
-export const updateTeacherProfile = (payload: TeacherProfileUpdatePayload) => {
-  const { certificate, ...data } = payload;
-
-  const formData = new FormData();
-
-  formData.append("data", JSON.stringify(data));
-  if (certificate) {
-    formData.append("certificate", certificate);
-  }
-
-  return apiClient<ApiResponse<UserProfile>>(`/teacher/profile-update`, {
-    method: "PATCH",
-    body: formData,
   });
 };

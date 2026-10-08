@@ -1,10 +1,8 @@
 import type z from "zod";
-import type {
-  studentProfileUpdateSchema,
-  teacherProfileUpdateSchema,
-  userProfileUpdateSchema,
-} from "@/schemas";
+import type { userProfileUpdateSchema } from "@/schemas";
 import type { Institution } from "./institution.types";
+import type { StudentDetails } from "./student.types";
+import type { TeacherDetails } from "./teacher.types";
 
 export type Role = "INSTITUTION_ADMIN" | "SUPER_ADMIN" | "STUDENT" | "TEACHER";
 
@@ -12,39 +10,6 @@ export type Providers = "CREDENTIALS" | "GOOGLE";
 export type UserStatus = "ACTIVE" | "BAN";
 export type MemberStatus = "NOT_JOINED" | "PENDING" | "APPROVED" | "DECLINED";
 export type Gender = "MALE" | "FEMALE" | "KINDER" | "OTHER";
-
-export interface StudentDetails {
-  student_id: string;
-  admission_year: number | null;
-  graduation_year: number | null;
-  date_of_birth: string | null;
-  gender: Gender | null;
-  phone: string | null;
-  address: string | null;
-  certificate_url: string | null;
-  certificate_public_id: string | null;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface TeacherDetails {
-  teacher_id: string;
-  designation: string | null;
-  degree: string | null;
-  specialization: string | null;
-  graduated_from: string | null;
-  graduation_year: number | null;
-  date_of_birth: string | null;
-  gender: Gender | null;
-  phone: string | null;
-  address: string | null;
-  joining_year: number | null;
-  bio: string | null;
-  certificate_url: string | null;
-  certificate_public_id: string | null;
-  created_at: string;
-  updated_at: string;
-}
 
 export interface User {
   id: string;
@@ -89,9 +54,3 @@ export type UserProfile =
     });
 
 export type UserProfileUpdatePayload = z.infer<typeof userProfileUpdateSchema>;
-export type TeacherProfileUpdatePayload = z.infer<
-  typeof teacherProfileUpdateSchema
->;
-export type StudentProfileUpdatePayload = z.infer<
-  typeof studentProfileUpdateSchema
->;

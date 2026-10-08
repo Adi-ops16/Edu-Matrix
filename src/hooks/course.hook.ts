@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  assignTeacherToCourse,
   createCourse,
   getCourseDetailsForAdmin,
   getCourseDetailsForStudents,
@@ -44,6 +45,18 @@ export const useCreateCourse = () => {
   return useMutation({
     mutationFn: createCourse,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["courses"] });
+    },
+  });
+};
+
+export const useAssignTeacherToCourse = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: assignTeacherToCourse,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["course-details/admin"] });
+      queryClient.invalidateQueries({ queryKey: ["course-details/students"] });
       queryClient.invalidateQueries({ queryKey: ["courses"] });
     },
   });

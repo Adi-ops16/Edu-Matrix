@@ -18,7 +18,6 @@ export const createCourseSchema = z
       ),
     department_id: z.uuid("Invalid department ID"),
 
-    // Flat fields for your form state
     include_details: z.boolean(),
     semester: z.string().optional(),
     batch: z.string().optional(),
@@ -30,7 +29,6 @@ export const createCourseSchema = z
   })
   .refine(
     (data) => {
-      // If user toggled radio to include details, ensure required detail fields are present
       if (data.include_details) {
         return Boolean(
           data.semester && data.batch && data.start_date && data.end_date,
@@ -44,3 +42,13 @@ export const createCourseSchema = z
       path: ["semester"],
     },
   );
+
+export const assignTeacherToCourseSchema = z.object({
+  course_details_id: z
+    .number("Course details id should be a number")
+    .int("Course details id must be an integer")
+    .min(1, "Course details id must be provided"),
+  teacher_id: z
+    .array(z.uuid("Invalid teacher ID"))
+    .min(1, "At least one teacher must be provided"),
+});

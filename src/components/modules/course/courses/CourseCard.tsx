@@ -1,5 +1,6 @@
 import { IconCash, IconInfoCircle } from "@tabler/icons-react";
 import Link from "next/link";
+import AssignTeacherDialog from "@/components/modals/AssignTeacherDialog";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -73,7 +74,7 @@ export default function CourseCard({ course, role }: Props) {
         )}
       </CardContent>
 
-      <CardFooter className="flex justify-end">
+      <CardFooter className="flex justify-end gap-1">
         {isAdmin && (
           <Link href={detailsHref}>
             <Button type="button" size="sm">
@@ -81,6 +82,10 @@ export default function CourseCard({ course, role }: Props) {
               Details
             </Button>
           </Link>
+        )}
+
+        {isAdmin && course.course_details && (
+          <AssignTeacherDialog courseDetailsId={course.course_details.id} />
         )}
 
         {course.course_details && isStudent && (

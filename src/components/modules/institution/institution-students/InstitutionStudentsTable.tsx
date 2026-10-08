@@ -26,7 +26,7 @@ export default function InstitutionStudentsTable({
   handlePageChange: Dispatch<SetStateAction<number>>;
 }) {
   const { data } = useGetInstitutionStudents(params);
-  const students = data.data ?? [];
+  const users = data.data ?? [];
 
   return (
     <div className="space-y-5">
@@ -43,38 +43,33 @@ export default function InstitutionStudentsTable({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {students.map((student) => (
-              <TableRow key={student.student_id}>
+            {users.map((user) => (
+              <TableRow key={user.student.student_id}>
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Avatar>
-                      <AvatarImage
-                        src={student.user.profile_url ?? ""}
-                        alt=""
-                      />
-                      <AvatarFallback>
-                        {getInitials(student.user.name)}
-                      </AvatarFallback>
+                      <AvatarImage src={user.profile_url ?? ""} alt="" />
+                      <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
                     </Avatar>
-                    <span className="font-medium">{student.user.name}</span>
+                    <span className="font-medium">{user.name}</span>
                   </div>
                 </TableCell>
-                <TableCell>{student.user.email}</TableCell>
+                <TableCell>{user.email}</TableCell>
                 <TableCell className="font-mono text-xs">
-                  {student.student_id}
+                  {user.student.student_id}
                 </TableCell>
                 <TableCell>
-                  {student.admission_year || "Not provided"}
+                  {user.student.admission_year || "Not provided"}
                 </TableCell>
                 <TableCell>
-                  {student.graduation_year || "Not provided"}
+                  {user.student.graduation_year || "Not provided"}
                 </TableCell>
                 <TableCell className="text-right">
-                  <InstitutionStudentsDetailsSheet student={student} />
+                  <InstitutionStudentsDetailsSheet user={user} />
                 </TableCell>
               </TableRow>
             ))}
-            {students.length === 0 && (
+            {users.length === 0 && (
               <TableRow>
                 <TableCell
                   colSpan={6}

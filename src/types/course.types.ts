@@ -1,10 +1,17 @@
 import type z from "zod";
-import type { createCourseSchema } from "@/schemas";
+import type {
+  assignTeacherToCourseSchema,
+  createCourseSchema,
+} from "@/schemas";
 import type { Department } from "./department.types";
-import type { TeacherDetails, User } from "./user.types";
+import type { TeacherDetails } from "./teacher.types";
+import type { User } from "./user.types";
 
 export type TCreateCoursePayload = z.infer<typeof createCourseSchema>;
 export type CreateCoursePayload = Omit<TCreateCoursePayload, "include_details">;
+export type assignTeacherToCoursePayload = z.infer<
+  typeof assignTeacherToCourseSchema
+>;
 
 export interface CourseDetails {
   id: number;

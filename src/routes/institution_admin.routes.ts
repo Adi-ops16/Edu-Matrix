@@ -5,6 +5,7 @@ import {
   IconBuildingPlus,
   IconChalkboardTeacher,
   IconUser,
+  IconUserPlus,
   IconUsers,
   IconWritingFilled,
 } from "@tabler/icons-react";
@@ -70,6 +71,11 @@ export const institutionAdminRoutes: Route[] = [
         title: "Courses",
         url: `${prefix}/courses`,
         icon: IconBook,
+      },
+      {
+        title: "Assign teachers",
+        url: `${prefix}/assign-teachers`,
+        icon: IconUserPlus,
       },
       {
         title: "Create Course",

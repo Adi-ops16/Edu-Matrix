@@ -70,6 +70,7 @@ export default function StudentProfileEditModal({
   student: StudentDetails | null;
 }) {
   const [open, setOpen] = useState(false);
+  // const { mutate: update, isPending } = useUpdateStudentProfile();
   const { mutate: update, isPending } = useUpdateStudentProfile();
 
   const form = useForm({

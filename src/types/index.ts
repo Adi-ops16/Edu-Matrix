@@ -4,4 +4,6 @@ export * from "./course.types";
 export * from "./department.types";
 export * from "./institution.types";
 export * from "./route.types";
+export * from "./student.types";
+export * from "./teacher.types";
 export * from "./user.types";

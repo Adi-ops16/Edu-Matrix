@@ -25,10 +25,11 @@ function Detail({ label, children }: { label: string; children: ReactNode }) {
 }
 
 export default function InstitutionStudentsDetailsSheet({
-  student,
+  user,
 }: {
-  student: InstitutionStudents;
+  user: InstitutionStudents;
 }) {
+  const student = user.student;
   return (
     <Sheet>
       <SheetTrigger
@@ -42,13 +43,13 @@ export default function InstitutionStudentsDetailsSheet({
         <SheetHeader className="border-b pr-12">
           <div className="flex items-center gap-3">
             <Avatar size="lg">
-              <AvatarImage src={student.user.profile_url ?? ""} alt="" />
-              <AvatarFallback>{getInitials(student.user.name)}</AvatarFallback>
+              <AvatarImage src={user.profile_url ?? ""} alt="" />
+              <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
             </Avatar>
             <div className="min-w-0">
-              <SheetTitle className="truncate">{student.user.name}</SheetTitle>
+              <SheetTitle className="truncate">{user.name}</SheetTitle>
               <SheetDescription className="break-all">
-                {student.user.email}
+                {user.email}
               </SheetDescription>
             </div>
           </div>
