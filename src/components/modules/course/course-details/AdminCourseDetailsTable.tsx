@@ -1,5 +1,7 @@
 "use client";
 
+import { IconPlus } from "@tabler/icons-react";
+import Link from "next/link";
 import type { FetchError } from "ofetch";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -98,24 +100,37 @@ export default function AdminCourseDetailsTable({
             Review batches, schedules, and current offering status.
           </p>
         </div>
-        <Select
-          items={[
-            { value: "desc", label: "Newest first" },
-            { value: "asc", label: "Oldest first" },
-          ]}
-          value={sortOrder}
-          onValueChange={(value) => {
-            if (value === "asc" || value === "desc") setSortOrder(value);
-          }}
-        >
-          <SelectTrigger className="w-full sm:w-52" aria-label="Sort offerings">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="desc">Newest first</SelectItem>
-            <SelectItem value="asc">Oldest first</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex gap-1 items-center">
+          <Link
+            href={`/institution_admin/create-course-details?courseId=${courseId}`}
+          >
+            <Button>
+              <IconPlus />
+              Create New Batch
+            </Button>
+          </Link>
+          <Select
+            items={[
+              { value: "desc", label: "Newest first" },
+              { value: "asc", label: "Oldest first" },
+            ]}
+            value={sortOrder}
+            onValueChange={(value) => {
+              if (value === "asc" || value === "desc") setSortOrder(value);
+            }}
+          >
+            <SelectTrigger
+              className="w-full sm:w-52"
+              aria-label="Sort offerings"
+            >
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="desc">Newest first</SelectItem>
+              <SelectItem value="asc">Oldest first</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </header>
 
       <div className="overflow-x-auto rounded-lg border bg-card">

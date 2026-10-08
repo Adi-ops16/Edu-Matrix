@@ -53,3 +53,23 @@ export const assignTeacherToCourseSchema = z.object({
     .min(1, "At least one teacher must be provided"),
 });
 
+export const createCourseDetailsSchema = z.object({
+  semester: z
+    .string("Semester must be a string")
+    .min(1, "Semester is required"),
+  batch: z.string("Batch must be a string").min(1, "Batch is required"),
+
+  start_date: z.string().optional(),
+  end_date: z.string().optional(),
+
+  price: z
+    .number("Price should be a number")
+    .min(0, "Price cannot be negative")
+    .optional()
+    .pipe(z.number("Price is required")),
+  currency: z
+    .string()
+    .length(3, "Currency must be a 3-letter currency code")
+    .transform((value) => value.toUpperCase()),
+  status: z.enum(["ONGOING", "UPCOMING"], "Invalid status enum"),
+});

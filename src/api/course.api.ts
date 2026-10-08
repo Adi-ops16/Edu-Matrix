@@ -5,6 +5,7 @@ import type {
   Course,
   CourseDetails,
   CourseDetailsStudent,
+  CreateCourseDetailsPayload,
   CreateCoursePayload,
   MyCoursesResponse,
   Query,
@@ -43,6 +44,13 @@ export const getMyCourses = () => {
 
 export const createCourse = (payload: CreateCoursePayload) => {
   return apiClient<ApiResponse<Course>>(`${prefix}/create/`, {
+    method: "POST",
+    body: payload,
+  });
+};
+
+export const createCourseDetails = (payload: CreateCourseDetailsPayload) => {
+  return apiClient<ApiResponse<Course>>(`${prefix}/create-details`, {
     method: "POST",
     body: payload,
   });

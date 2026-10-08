@@ -3,6 +3,7 @@
 import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
+import CourseCardsSkeleton from "@/components/shared/CourseCardsSkeleton";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -92,9 +93,7 @@ export default function Courses() {
           No department found.
         </div>
       ) : isLoading ? (
-        <div className="rounded-lg border bg-card px-6 py-12 text-center text-sm text-muted-foreground">
-          Loading courses...
-        </div>
+        <CourseCardsSkeleton count={3} />
       ) : isError ? (
         <div className="flex flex-col items-center gap-3 rounded-lg border bg-card px-6 py-12 text-center text-sm text-muted-foreground">
           <p>Couldn&apos;t load courses for this department.</p>
