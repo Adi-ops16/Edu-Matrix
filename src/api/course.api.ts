@@ -5,6 +5,7 @@ import type {
   CourseDetails,
   CourseDetailsStudent,
   CreateCoursePayload,
+  MyCoursesResponse,
   Query,
 } from "@/types";
 
@@ -32,6 +33,10 @@ export const getCourseDetailsForStudents = (courseId: string) => {
   return apiClient<ApiResponse<CourseDetailsStudent>>(
     `${prefix}/details/${courseId}`,
   );
+};
+
+export const getMyCourses = () => {
+  return apiClient<ApiResponse<MyCoursesResponse[]>>(`${prefix}/my-courses`);
 };
 
 export const createCourse = (payload: CreateCoursePayload) => {

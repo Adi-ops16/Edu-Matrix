@@ -43,3 +43,15 @@ export interface CourseDetailsStudent extends CourseDetails {
   description: string;
   learning_outcomes: string[];
 }
+
+export interface MyCoursesResponse
+  extends Pick<
+    CourseDetails,
+    "semester" | "start_date" | "end_date" | "status"
+  > {
+  department: Pick<
+    Department,
+    "code" | "department_description" | "department_established_year" | "name"
+  >;
+  course: Pick<Course, "learning_outcomes" | "title" | "description" | "code">;
+}

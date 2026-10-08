@@ -4,6 +4,7 @@ import {
   getCourseDetailsForAdmin,
   getCourseDetailsForStudents,
   getCourses,
+  getMyCourses,
 } from "@/api";
 import type { Query } from "@/types";
 
@@ -28,6 +29,13 @@ export const useGetCourseDetailsForStudents = (courseId: string) => {
     queryKey: ["course-details/students", courseId],
     queryFn: () => getCourseDetailsForStudents(courseId),
     enabled: Boolean(courseId),
+  });
+};
+
+export const useGetMyCourses = () => {
+  return useQuery({
+    queryKey: ["my-courses"],
+    queryFn: getMyCourses,
   });
 };
 
