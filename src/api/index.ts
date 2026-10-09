@@ -4,5 +4,6 @@ export * from "./department.api";
 export * from "./institution.api";
 export * from "./payment.api";
 export * from "./student.api";
+export * from "./super_admin.api";
 export * from "./teacher.api";
 export * from "./user.api";

@@ -6,5 +6,6 @@ export * from "./institution.types";
 export * from "./payment.types";
 export * from "./route.types";
 export * from "./student.types";
+export * from "./super_admin.types";
 export * from "./teacher.types";
 export * from "./user.types";

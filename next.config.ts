@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/v1/:path*",
+        destination: "https://edu-matrix-backend.vercel.app/api/v1/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

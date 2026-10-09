@@ -3,8 +3,8 @@
 import { IconAlertCircle, IconShieldCheck } from "@tabler/icons-react";
 import Link from "next/link";
 import { useEffect } from "react";
-import { useGetProfile } from "@/hooks";
 import Logo from "@/components/shared/Logo";
+import { useGetProfile } from "@/hooks";
 
 const dashboardPaths = {
   INSTITUTION_ADMIN: "/institution_admin",

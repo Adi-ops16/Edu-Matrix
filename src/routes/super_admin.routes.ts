@@ -1,5 +1,6 @@
 import {
   IconBuildingCommunity,
+  IconChartBar,
   IconClipboardList,
   IconUser,
 } from "@tabler/icons-react";
@@ -30,6 +31,16 @@ export const SuperAdminRoutes: Route[] = [
         title: "Applications",
         url: `${prefix}/institution-applications`,
         icon: IconClipboardList,
+      },
+    ],
+  },
+  {
+    title: "Platform",
+    items: [
+      {
+        title: "Overview",
+        url: `${prefix}/overview`,
+        icon: IconChartBar,
       },
     ],
   },

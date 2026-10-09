@@ -5,5 +5,6 @@ export * from "./institution.hook";
 export * from "./institution.hook";
 export * from "./payment.hook";
 export * from "./student.hook";
+export * from "./super_admin.hook";
 export * from "./teacher.hook";
 export * from "./user.hook";
