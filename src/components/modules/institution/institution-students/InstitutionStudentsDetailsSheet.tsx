@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import type { InstitutionStudents } from "@/types";
+import type { InstitutionStudents, StudentDetails } from "@/types";
 import formatDate from "@/utils/formatDate";
 import getInitials from "@/utils/getInitials";
 
@@ -27,7 +27,9 @@ function Detail({ label, children }: { label: string; children: ReactNode }) {
 export default function InstitutionStudentsDetailsSheet({
   user,
 }: {
-  user: InstitutionStudents;
+  user: Omit<InstitutionStudents, "student"> & {
+    student?: StudentDetails | null;
+  };
 }) {
   const student = user.student;
   return (
@@ -56,40 +58,48 @@ export default function InstitutionStudentsDetailsSheet({
         </SheetHeader>
         <div className="px-4 pb-6">
           <h3 className="mb-2 text-sm font-semibold">Student details</h3>
-          <dl>
-            <Detail label="Student ID">{student.student_id}</Detail>
-            <Detail label="Admission year">
-              {student.admission_year || "Not provided"}
-            </Detail>
-            <Detail label="Graduation year">
-              {student.graduation_year || "Not provided"}
-            </Detail>
-            <Detail label="Date of birth">
-              {formatDate(student.date_of_birth)}
-            </Detail>
-            <Detail label="Gender">
-              {student.gender
-                ? student.gender.charAt(0) +
-                  student.gender.slice(1).toLowerCase()
-                : "Not provided"}
-            </Detail>
-            <Detail label="Phone">{student.phone || "Not provided"}</Detail>
-            <Detail label="Address">{student.address || "Not provided"}</Detail>
-            <Detail label="Certificate">
-              {student.certificate_url ? (
-                <a
-                  href={student.certificate_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-primary underline underline-offset-4"
-                >
-                  View certificate
-                </a>
-              ) : (
-                "Not provided"
-              )}
-            </Detail>
-          </dl>
+          {student ? (
+            <dl>
+              <Detail label="Student ID">{student.student_id}</Detail>
+              <Detail label="Admission year">
+                {student.admission_year || "Not provided"}
+              </Detail>
+              <Detail label="Graduation year">
+                {student.graduation_year || "Not provided"}
+              </Detail>
+              <Detail label="Date of birth">
+                {formatDate(student.date_of_birth)}
+              </Detail>
+              <Detail label="Gender">
+                {student.gender
+                  ? student.gender.charAt(0) +
+                    student.gender.slice(1).toLowerCase()
+                  : "Not provided"}
+              </Detail>
+              <Detail label="Phone">{student.phone || "Not provided"}</Detail>
+              <Detail label="Address">
+                {student.address || "Not provided"}
+              </Detail>
+              <Detail label="Certificate">
+                {student.certificate_url ? (
+                  <a
+                    href={student.certificate_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary underline underline-offset-4"
+                  >
+                    View certificate
+                  </a>
+                ) : (
+                  "Not provided"
+                )}
+              </Detail>
+            </dl>
+          ) : (
+            <p className="rounded-md border bg-muted/40 p-4 text-sm text-muted-foreground">
+              Student details are not available.
+            </p>
+          )}
         </div>
       </SheetContent>
     </Sheet>

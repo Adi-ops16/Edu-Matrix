@@ -4,14 +4,8 @@ import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
 import CourseCardsSkeleton from "@/components/shared/CourseCardsSkeleton";
+import DepartmentSelect from "@/components/shared/DepartmentSelect";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   useGetCourses,
   useGetDepartments,
@@ -54,31 +48,12 @@ export default function Courses() {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          {departments.length > 0 && (
-            <Select
-              items={departments.map((department) => ({
-                key: department.id,
-                value: department.id,
-                label: `${department.name} (${department.code})`,
-              }))}
-              value={activeDepartmentId}
-              onValueChange={(value) => setSelectedDepartmentId(value ?? "")}
-            >
-              <SelectTrigger
-                className="w-full sm:w-72"
-                aria-label="Select department"
-              >
-                <SelectValue placeholder="Select a department" />
-              </SelectTrigger>
-              <SelectContent>
-                {departments.map((department) => (
-                  <SelectItem key={department.id} value={department.id}>
-                    {department.name} ({department.code})
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
+          <DepartmentSelect
+            activeDepartmentId={activeDepartmentId}
+            setSelectedDepartmentId={setSelectedDepartmentId}
+            departments={departments}
+          />
+
           {role === "INSTITUTION_ADMIN" && (
             <Link href="/institution_admin/create-course">
               <Button className="w-full sm:w-auto">

@@ -1,6 +1,7 @@
 import apiClient from "@/lib/ofetch";
 import type {
   ApiResponse,
+  DepartmentTeachers,
   GetTeachersToAssignResponse,
   InstitutionTeachers,
   Query,
@@ -38,6 +39,15 @@ export const getTeachersToAssignToCourse = (
 ) => {
   return apiClient<ApiResponse<GetTeachersToAssignResponse[]>>(
     `${prefix}/assign/${courseDetailsId}`,
+    {
+      query,
+    },
+  );
+};
+
+export const getDepartmentTeachers = (department_id: string, query: Query) => {
+  return apiClient<ApiResponse<DepartmentTeachers[]>>(
+    `${prefix}/department/${department_id}`,
     {
       query,
     },

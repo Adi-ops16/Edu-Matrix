@@ -27,7 +27,9 @@ function Detail({ label, children }: { label: string; children: ReactNode }) {
 export default function InstitutionTeachersSheet({
   teacher,
 }: {
-  teacher: InstitutionTeachers;
+  teacher: Omit<InstitutionTeachers, "teacher"> & {
+    teacher?: InstitutionTeachers["teacher"] | null;
+  };
 }) {
   const details = teacher.teacher;
 
@@ -57,51 +59,61 @@ export default function InstitutionTeachersSheet({
         </SheetHeader>
         <div className="px-4 pb-6">
           <h3 className="mb-2 text-sm font-semibold">Teacher details</h3>
-          <dl>
-            <Detail label="Teacher ID">{details.teacher_id}</Detail>
-            <Detail label="Designation">
-              {details.designation || "Not provided"}
-            </Detail>
-            <Detail label="Degree">{details.degree || "Not provided"}</Detail>
-            <Detail label="Specialization">
-              {details.specialization || "Not provided"}
-            </Detail>
-            <Detail label="Graduated from">
-              {details.graduated_from || "Not provided"}
-            </Detail>
-            <Detail label="Graduation year">
-              {details.graduation_year || "Not provided"}
-            </Detail>
-            <Detail label="Joining year">
-              {details.joining_year || "Not provided"}
-            </Detail>
-            <Detail label="Date of birth">
-              {formatDate(details.date_of_birth)}
-            </Detail>
-            <Detail label="Gender">
-              {details.gender
-                ? details.gender.charAt(0) +
-                  details.gender.slice(1).toLowerCase()
-                : "Not provided"}
-            </Detail>
-            <Detail label="Phone">{details.phone || "Not provided"}</Detail>
-            <Detail label="Address">{details.address || "Not provided"}</Detail>
-            <Detail label="Bio">{details.bio || "Not provided"}</Detail>
-            <Detail label="Certificate">
-              {details.certificate_url ? (
-                <a
-                  href={details.certificate_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-primary underline underline-offset-4"
-                >
-                  View certificate
-                </a>
-              ) : (
-                "Not provided"
-              )}
-            </Detail>
-          </dl>
+          {details ? (
+            <dl>
+              <Detail label="Teacher ID">{details.teacher_id}</Detail>
+              <Detail label="Designation">
+                {details.designation || "Not provided"}
+              </Detail>
+              <Detail label="Degree">
+                {details.degree || "Not provided"}
+              </Detail>
+              <Detail label="Specialization">
+                {details.specialization || "Not provided"}
+              </Detail>
+              <Detail label="Graduated from">
+                {details.graduated_from || "Not provided"}
+              </Detail>
+              <Detail label="Graduation year">
+                {details.graduation_year || "Not provided"}
+              </Detail>
+              <Detail label="Joining year">
+                {details.joining_year || "Not provided"}
+              </Detail>
+              <Detail label="Date of birth">
+                {formatDate(details.date_of_birth)}
+              </Detail>
+              <Detail label="Gender">
+                {details.gender
+                  ? details.gender.charAt(0) +
+                    details.gender.slice(1).toLowerCase()
+                  : "Not provided"}
+              </Detail>
+              <Detail label="Phone">{details.phone || "Not provided"}</Detail>
+              <Detail label="Address">
+                {details.address || "Not provided"}
+              </Detail>
+              <Detail label="Bio">{details.bio || "Not provided"}</Detail>
+              <Detail label="Certificate">
+                {details.certificate_url ? (
+                  <a
+                    href={details.certificate_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary underline underline-offset-4"
+                  >
+                    View certificate
+                  </a>
+                ) : (
+                  "Not provided"
+                )}
+              </Detail>
+            </dl>
+          ) : (
+            <p className="rounded-md border bg-muted/40 p-4 text-sm text-muted-foreground">
+              Teacher details are not available.
+            </p>
+          )}
         </div>
       </SheetContent>
     </Sheet>

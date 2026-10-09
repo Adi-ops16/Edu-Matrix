@@ -24,3 +24,5 @@ export interface InstitutionStudents
   extends Pick<User, "name" | "email" | "profile_url"> {
   student: StudentDetails;
 }
+
+export interface DepartmentStudents extends InstitutionStudents {}

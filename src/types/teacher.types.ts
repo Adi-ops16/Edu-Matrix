@@ -41,3 +41,5 @@ export type GetTeachersToAssignResponse = Pick<
     TeacherDetails,
     "teacher_id" | "degree" | "designation" | "specialization"
   >;
+
+export interface DepartmentTeachers extends InstitutionTeachers {}

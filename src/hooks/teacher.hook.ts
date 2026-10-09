@@ -5,6 +5,7 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import {
+  getDepartmentTeachers,
   getInstitutionTeachers,
   getTeachersToAssignToCourse,
   updateTeacherProfile,
@@ -37,5 +38,15 @@ export const useGetTeacherToAssignToCourse = (
     queryKey: ["teachers-assign", courseDetailsId, query],
     queryFn: () => getTeachersToAssignToCourse(courseDetailsId, query),
     enabled: Boolean(courseDetailsId) && enabled,
+  });
+};
+
+export const useGetDepartmentTeachers = (
+  department_id: string,
+  query: Query,
+) => {
+  return useSuspenseQuery({
+    queryKey: ["department-teachers", department_id, query],
+    queryFn: () => getDepartmentTeachers(department_id, query),
   });
 };

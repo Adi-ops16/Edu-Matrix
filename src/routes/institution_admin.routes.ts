@@ -62,6 +62,11 @@ export const institutionAdminRoutes: Route[] = [
         url: `${prefix}/department-applications`,
         icon: IconBuildingPlus,
       },
+      {
+        title: "Department Members",
+        url: `${prefix}/department-members`,
+        icon: IconUsers,
+      },
     ],
   },
   {

@@ -3,14 +3,8 @@
 import { IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
+import DepartmentSelect from "@/components/shared/DepartmentSelect";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Spinner } from "@/components/ui/spinner";
 import { useGetCourses, useGetDepartments, useGetProfile } from "@/hooks";
 import type { Role } from "@/types";
@@ -43,31 +37,11 @@ export default function AssignTeachers() {
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          {departments.length > 0 && (
-            <Select
-              items={departments.map((department) => ({
-                key: department.id,
-                value: department.id,
-                label: `${department.name} (${department.code})`,
-              }))}
-              value={activeDepartmentId}
-              onValueChange={(value) => setSelectedDepartmentId(value ?? "")}
-            >
-              <SelectTrigger
-                className="w-full sm:w-72"
-                aria-label="Select a department to view its courses"
-              >
-                <SelectValue placeholder="Select a department" />
-              </SelectTrigger>
-              <SelectContent>
-                {departments.map((department) => (
-                  <SelectItem key={department.id} value={department.id}>
-                    {department.name} ({department.code})
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
+          <DepartmentSelect
+            departments={departments}
+            setSelectedDepartmentId={setSelectedDepartmentId}
+            activeDepartmentId={activeDepartmentId}
+          />
           {role === "INSTITUTION_ADMIN" && (
             <Link href="/institution_admin/create-course">
               <Button className="w-full sm:w-auto">

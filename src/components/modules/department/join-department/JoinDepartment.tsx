@@ -2,13 +2,7 @@
 
 import type { FetchError } from "ofetch";
 import { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import DepartmentSelect from "@/components/shared/DepartmentSelect";
 import {
   useGetDepartmentRequests,
   useGetDepartments,
@@ -92,31 +86,11 @@ export default function JoinDepartment() {
           </p>
         </div>
 
-        {departments.length > 0 && (
-          <Select
-            items={departments.map((department) => ({
-              key: department.id,
-              value: department.id,
-              label: `${department.name} (${department.code})`,
-            }))}
-            value={activeDepartmentId}
-            onValueChange={(value) => setSelectedDepartmentId(value ?? "")}
-          >
-            <SelectTrigger
-              className="w-full sm:w-72"
-              aria-label="Select department"
-            >
-              <SelectValue placeholder="Select a department" />
-            </SelectTrigger>
-            <SelectContent>
-              {departments.map((department) => (
-                <SelectItem key={department.id} value={department.id}>
-                  {department.name} ({department.code})
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
+        <DepartmentSelect
+          departments={departments}
+          setSelectedDepartmentId={setSelectedDepartmentId}
+          activeDepartmentId={activeDepartmentId}
+        />
       </header>
 
       {departments.length === 0 ? (
