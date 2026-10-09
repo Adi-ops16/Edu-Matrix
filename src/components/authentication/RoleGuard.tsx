@@ -14,27 +14,23 @@ interface Props {
 
 export default function RoleGuard({ children, roles }: Props) {
   const router = useRouter();
-  const { data, error, isError, isPending } = useGetProfile();
+  const { data, isError, isPending } = useGetProfile();
   const profile = data?.data;
-
-  if (isError) {
-    throw error;
-  }
 
   useEffect(() => {
     if (isPending) {
       return;
     }
-    if (!profile) {
+    if (isError || !profile) {
       router.replace("/login");
       return;
     }
     if (!profile.role) {
       router.replace("/select-institution");
     }
-  }, [profile, profile?.role, router, isPending]);
+  }, [profile, isError, router, isPending]);
 
-  if (isPending || !profile?.role) {
+  if (isPending || isError || !profile?.role) {
     return <AuthLoading />;
   }
 

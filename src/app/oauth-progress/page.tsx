@@ -1,29 +1,33 @@
 "use client";
 
-import { IconShieldCheck } from "@tabler/icons-react";
+import { IconAlertCircle, IconShieldCheck } from "@tabler/icons-react";
+import Link from "next/link";
 import { useEffect } from "react";
+import { useGetProfile } from "@/hooks";
 import Logo from "@/components/shared/Logo";
 
-const dashboardRoles = new Set([
-  "student",
-  "teacher",
-  "super_admin",
-  "institution_admin",
-]);
+const dashboardPaths = {
+  INSTITUTION_ADMIN: "/institution_admin",
+  STUDENT: "/student",
+  SUPER_ADMIN: "/super_admin",
+  TEACHER: "/teacher",
+} as const;
 
 export default function OAuthProgressPage() {
-  useEffect(() => {
-    const role = new URLSearchParams(window.location.search)
-      .get("role")
-      ?.toLowerCase();
-    const destination =
-      role && dashboardRoles.has(role) ? `/${role}` : "/select-institution";
+  const { data, isPending, isError } = useGetProfile();
+  const profile = data?.data;
+  const StatusIcon = isError ? IconAlertCircle : IconShieldCheck;
 
-    const timer = window.setTimeout(() => {
-      window.location.replace(destination);
-    }, 2000);
-    return () => window.clearTimeout(timer);
-  }, []);
+  useEffect(() => {
+    if (isPending || isError || !profile) {
+      return;
+    }
+
+    const destination = profile.role
+      ? dashboardPaths[profile.role]
+      : "/select-institution";
+    window.location.replace(destination);
+  }, [profile, isError, isPending]);
 
   return (
     <main className="relative flex min-h-svh items-center justify-center overflow-hidden px-5 py-12 text-[#18221f]">
@@ -46,8 +50,14 @@ export default function OAuthProgressPage() {
           aria-live="polite"
           className="w-full rounded-2xl border border-[#e4e9e6] bg-white px-7 py-9 text-center shadow-[0_24px_80px_-36px_rgba(20,50,38,0.28)] sm:px-10"
         >
-          <div className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-[#eaf5ef] text-[#087653]">
-            <IconShieldCheck size={30} stroke={1.7} aria-hidden="true" />
+          <div
+            className={`mx-auto mb-6 flex size-16 items-center justify-center rounded-full ${
+              isError
+                ? "bg-destructive/10 text-destructive"
+                : "bg-[#eaf5ef] text-[#087653]"
+            }`}
+          >
+            <StatusIcon size={30} stroke={1.7} aria-hidden="true" />
           </div>
 
           <h1
@@ -57,23 +67,44 @@ export default function OAuthProgressPage() {
             Securing your account
           </h1>
           <p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-[#66736d]">
-            Your Google sign-in is complete. We’re preparing your Edu-Matrix
-            workspace.
+            {isError
+              ? "Google approved sign-in, but we couldn’t verify your Edu-Matrix session."
+              : "We’re verifying your Edu-Matrix session and preparing your workspace."}
           </p>
 
-          <div className="mt-8 flex items-center justify-center gap-3 rounded-lg bg-[#f7faf8] px-4 py-3.5 text-left">
-            <span
-              aria-hidden="true"
-              className="size-5 shrink-0 animate-spin rounded-full border-2 border-[#c8ded3] border-t-[#087653]"
-            />
-            <span className="text-sm font-medium text-[#34463d]">
-              Finishing sign-in and redirecting...
-            </span>
-          </div>
+          {isError ? (
+            <div className="mt-8 rounded-lg bg-[#f7faf8] px-4 py-4 text-left">
+              <p className="text-sm leading-6 text-[#34463d]">
+                Your session cookie may not have been saved or sent by the
+                browser. Please try signing in again. If this keeps happening,
+                contact your administrator.
+              </p>
+              <Link
+                href="/login"
+                className="mt-3 inline-flex text-sm font-semibold text-[#087653] underline underline-offset-4"
+              >
+                Return to sign in
+              </Link>
+            </div>
+          ) : (
+            <div className="mt-8 flex items-center justify-center gap-3 rounded-lg bg-[#f7faf8] px-4 py-3.5 text-left">
+              <span
+                aria-hidden="true"
+                className="size-5 shrink-0 animate-spin rounded-full border-2 border-[#c8ded3] border-t-[#087653]"
+              />
+              <span className="text-sm font-medium text-[#34463d]">
+                {isPending
+                  ? "Verifying account..."
+                  : "Account verified. Redirecting..."}
+              </span>
+            </div>
+          )}
 
-          <p className="mt-5 text-xs text-[#87928c]">
-            Please keep this page open for a moment.
-          </p>
+          {!isError && (
+            <p className="mt-5 text-xs text-[#87928c]">
+              Please keep this page open for a moment.
+            </p>
+          )}
         </section>
       </div>
     </main>
