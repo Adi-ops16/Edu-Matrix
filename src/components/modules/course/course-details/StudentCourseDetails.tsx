@@ -1,4 +1,4 @@
-import { IconCreditCard } from "@tabler/icons-react";
+import StripePaymentButton from "@/components/Buttons/StripePaymentButton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -170,13 +170,7 @@ function StudentCourseLayout({
             </CardContent>
           </Card>
 
-          <Button
-            type="button"
-            className="w-full md:col-span-2 xl:col-span-1"
-            disabled={!courseDetails}
-          >
-            <IconCreditCard aria-hidden="true" /> Pay with Stripe
-          </Button>
+          <StripePaymentButton courseDetails={courseDetails} />
         </aside>
       </div>
     </section>

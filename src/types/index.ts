@@ -3,6 +3,7 @@ export * from "./auth.types";
 export * from "./course.types";
 export * from "./department.types";
 export * from "./institution.types";
+export * from "./payment.types";
 export * from "./route.types";
 export * from "./student.types";
 export * from "./teacher.types";

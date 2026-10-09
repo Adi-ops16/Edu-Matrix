@@ -3,6 +3,7 @@ export * from "./course.hook";
 export * from "./department.hook";
 export * from "./institution.hook";
 export * from "./institution.hook";
+export * from "./payment.hook";
 export * from "./student.hook";
 export * from "./teacher.hook";
 export * from "./user.hook";

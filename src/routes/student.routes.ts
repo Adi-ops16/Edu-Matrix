@@ -2,6 +2,7 @@ import {
   IconBookFilled,
   IconBookmark,
   IconBuilding,
+  IconCreditCard,
   IconUser,
 } from "@tabler/icons-react";
 import type { Route } from "@/types";
@@ -35,6 +36,16 @@ export const studentRoutes: Route[] = [
         title: "All Courses",
         url: `${prefix}/courses`,
         icon: IconBookFilled,
+      },
+    ],
+  },
+  {
+    title: "Payments",
+    items: [
+      {
+        title: "Payment History",
+        url: `${prefix}/payment-history`,
+        icon: IconCreditCard,
       },
     ],
   },
