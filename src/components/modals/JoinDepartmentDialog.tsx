@@ -38,12 +38,14 @@ export default function JoinDepartmentDialog({
               title: "Error sending request",
               description: res.message || "please, try again in a while",
             });
+            return;
           }
           triggerToast({
             type: "success",
             title: "Request sent successfully",
             description: "Joining request sent, please wait for approval",
           });
+          setJoinDepartment(null);
         },
         onError: (err: FetchError) => {
           const message = err.data?.message;

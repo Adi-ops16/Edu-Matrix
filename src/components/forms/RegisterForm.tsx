@@ -1,4 +1,5 @@
 "use client";
+
 import {
   IconEye,
   IconEyeClosed,
@@ -337,8 +338,9 @@ export function RegisterForm({
 
           <div className="relative hidden bg-muted md:block">
             <Image
-              width={100}
-              height={200}
+              fill
+              priority
+              sizes="(min-width: 768px) 50vw, 0px"
               src="/registerBanner.png"
               alt="Register form image"
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.8]"

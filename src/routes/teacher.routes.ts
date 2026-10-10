@@ -1,4 +1,4 @@
-import { IconBookmark, IconUser } from "@tabler/icons-react";
+import { IconBookmark, IconBuilding, IconUser } from "@tabler/icons-react";
 import type { Route } from "@/types";
 
 const prefix = "/teacher";
@@ -11,6 +11,16 @@ export const teacherRoutes: Route[] = [
         title: "Profile",
         url: `${prefix}`,
         icon: IconUser,
+      },
+    ],
+  },
+  {
+    title: "Department Management",
+    items: [
+      {
+        title: "Departments",
+        url: `${prefix}/departments`,
+        icon: IconBuilding,
       },
     ],
   },

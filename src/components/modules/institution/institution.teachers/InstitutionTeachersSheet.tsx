@@ -63,10 +63,10 @@ export default function InstitutionTeachersSheet({
             <dl>
               <Detail label="Teacher ID">{details.teacher_id}</Detail>
               <Detail label="Designation">
-                {details.designation || "Not provided"}
+                {details?.designation || "Not provided"}
               </Detail>
               <Detail label="Degree">
-                {details.degree || "Not provided"}
+                {details?.degree || "Not provided"}
               </Detail>
               <Detail label="Specialization">
                 {details.specialization || "Not provided"}

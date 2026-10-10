@@ -18,46 +18,95 @@ export default function DepartmentTabs() {
   const departments = data?.data?.departments ?? [];
   const myDepartmentIds = data?.data?.myDepartmentsIds ?? [];
 
-  const { myDepartments, otherDepartments } = useMemo(() => {
-    if (!departments.length) return { myDepartments: [], otherDepartments: [] };
+  const { myDepartments, joinDepartments } = useMemo(() => {
+    if (!departments.length) return { myDepartments: [], joinDepartments: [] };
 
     const idSet = new Set(myDepartmentIds);
     const my: typeof departments = [];
-    const other: typeof departments = [];
+    const join: typeof departments = [];
 
     for (const dept of departments) {
       if (idSet.has(dept.id)) {
         my.push(dept);
       } else {
-        other.push(dept);
+        join.push(dept);
       }
     }
 
-    return { myDepartments: my, otherDepartments: other };
+    return { myDepartments: my, joinDepartments: join };
   }, [departments, myDepartmentIds]);
 
   const hasMyDepartments = myDepartments.length > 0;
-  const hasOtherDepartments = otherDepartments.length > 0;
+  const hasJoinDepartments = joinDepartments.length > 0;
+  const availableTabs = [
+    ...(hasMyDepartments ? ["my-departments"] : []),
+    ...(hasJoinDepartments ? ["join-departments"] : []),
+    "all-departments",
+  ];
+  const [selectedTab, setSelectedTab] = useState(
+    hasMyDepartments ? "my-departments" : "all-departments",
+  );
+  const activeTab = availableTabs.includes(selectedTab)
+    ? selectedTab
+    : hasMyDepartments
+      ? "my-departments"
+      : "all-departments";
 
   return (
-    <Tabs
-      defaultValue={`${hasMyDepartments ? "my-departments" : "all-departments"}`}
-      className="w-full min-w-0 items-start"
-    >
-      <TabsList className="self-start justify-start">
+    <>
+      <Tabs
+        value={activeTab}
+        onValueChange={(value) => {
+          if (typeof value === "string" && availableTabs.includes(value)) {
+            setSelectedTab(value);
+          }
+        }}
+        className="w-full min-w-0 items-start"
+      >
+        <TabsList className="self-start justify-start">
+          {hasMyDepartments && (
+            <TabsTrigger value="my-departments">My Departments</TabsTrigger>
+          )}
+          {hasJoinDepartments && (
+            <TabsTrigger value="join-departments">Join Departments</TabsTrigger>
+          )}
+          <TabsTrigger value="all-departments">All Departments</TabsTrigger>
+        </TabsList>
         {hasMyDepartments && (
-          <TabsTrigger value="my-departments">My Departments</TabsTrigger>
+          <TabsContent value="my-departments" className="w-full min-w-0">
+            <div className="w-full min-w-0 overflow-x-auto">
+              <DepartmentsTable
+                departments={myDepartments}
+                refetch={refetch}
+                setDescriptionDepartment={setDescriptionDepartment}
+              />
+            </div>
+            <DepartmentDescriptionDialog
+              descriptionDepartment={descriptionDepartment}
+              setDescriptionDepartment={setDescriptionDepartment}
+            />
+          </TabsContent>
         )}
-        {hasOtherDepartments && (
-          <TabsTrigger value="other-departments">Other Departments</TabsTrigger>
+        {hasJoinDepartments && (
+          <TabsContent value="join-departments" className="w-full min-w-0">
+            <div className="w-full min-w-0 overflow-x-auto">
+              <DepartmentsTable
+                departments={joinDepartments}
+                refetch={refetch}
+                setJoinDepartment={setJoinDepartment}
+                setDescriptionDepartment={setDescriptionDepartment}
+              />
+            </div>
+            <DepartmentDescriptionDialog
+              descriptionDepartment={descriptionDepartment}
+              setDescriptionDepartment={setDescriptionDepartment}
+            />
+          </TabsContent>
         )}
-        <TabsTrigger value="all-departments">All Departments</TabsTrigger>
-      </TabsList>
-      {hasMyDepartments && (
-        <TabsContent value="my-departments" className="w-full min-w-0">
+        <TabsContent value="all-departments" className="w-full min-w-0">
           <div className="w-full min-w-0 overflow-x-auto">
             <DepartmentsTable
-              departments={myDepartments}
+              departments={departments}
               refetch={refetch}
               setDescriptionDepartment={setDescriptionDepartment}
             />
@@ -67,40 +116,11 @@ export default function DepartmentTabs() {
             setDescriptionDepartment={setDescriptionDepartment}
           />
         </TabsContent>
-      )}
-      {hasOtherDepartments && (
-        <TabsContent value="other-departments" className="w-full min-w-0">
-          <div className="w-full min-w-0 overflow-x-auto">
-            <DepartmentsTable
-              departments={otherDepartments}
-              refetch={refetch}
-              setJoinDepartment={setJoinDepartment}
-              setDescriptionDepartment={setDescriptionDepartment}
-            />
-          </div>
-          <DepartmentDescriptionDialog
-            descriptionDepartment={descriptionDepartment}
-            setDescriptionDepartment={setDescriptionDepartment}
-          />
-          <JoinDepartmentDialog
-            setJoinDepartment={setJoinDepartment}
-            department={joinDepartment}
-          />
-        </TabsContent>
-      )}
-      <TabsContent value="all-departments" className="w-full min-w-0">
-        <div className="w-full min-w-0 overflow-x-auto">
-          <DepartmentsTable
-            departments={departments}
-            refetch={refetch}
-            setDescriptionDepartment={setDescriptionDepartment}
-          />
-        </div>
-        <DepartmentDescriptionDialog
-          descriptionDepartment={descriptionDepartment}
-          setDescriptionDepartment={setDescriptionDepartment}
-        />
-      </TabsContent>
-    </Tabs>
+      </Tabs>
+      <JoinDepartmentDialog
+        setJoinDepartment={setJoinDepartment}
+        department={joinDepartment}
+      />
+    </>
   );
 }

@@ -44,7 +44,7 @@ export default function InstitutionTeachersTable({
           </TableHeader>
           <TableBody>
             {teachers.map((teacher) => (
-              <TableRow key={teacher.teacher.teacher_id}>
+              <TableRow key={teacher?.teacher?.teacher_id + 1}>
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Avatar>
@@ -58,13 +58,13 @@ export default function InstitutionTeachersTable({
                 </TableCell>
                 <TableCell>{teacher.email}</TableCell>
                 <TableCell>
-                  {teacher.teacher.designation || "Not provided"}
+                  {teacher.teacher?.designation || "Not provided"}
                 </TableCell>
                 <TableCell>
-                  {teacher.teacher.specialization || "Not provided"}
+                  {teacher.teacher?.specialization || "Not provided"}
                 </TableCell>
                 <TableCell>
-                  {teacher.teacher.joining_year || "Not provided"}
+                  {teacher.teacher?.joining_year ?? "Not provided"}
                 </TableCell>
                 <TableCell className="text-right">
                   <InstitutionTeachersSheet teacher={teacher} />

@@ -22,7 +22,23 @@ import { useLogin } from "@/hooks";
 import { loginSchema } from "@/schemas";
 import triggerToast from "@/utils/triggerToast";
 import GoogleAuthButton from "../Buttons/GoogleAuthButton";
+import { ButtonGroup } from "../ui/button-group";
 import { Spinner } from "../ui/spinner";
+
+const DEMO_ACCOUNTS = [
+  {
+    label: "Super Admin",
+    email: "superadmin@gmail.com",
+    password: "superAdmin1",
+  },
+  {
+    label: "Institution Admin",
+    email: "iadmin1@gmail.com",
+    password: "a12345678A",
+  },
+  { label: "Teacher", email: "teacher2@gmail.com", password: "a12345678A" },
+  { label: "Student", email: "student1@gmail.com", password: "a12345678A" },
+];
 
 export function LoginForm({
   className,
@@ -35,8 +51,8 @@ export function LoginForm({
 
   const form = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: "teacher1@gmail.com",
+      password: "a12345678A",
     },
     validators: {
       onSubmit: loginSchema,
@@ -54,14 +70,13 @@ export function LoginForm({
               title: "Login Failure",
               description: res.message || "Internal Server error",
             });
+            return;
           }
           triggerToast({
             type: "success",
             title: "Login Successful",
             description: "Welcome back to edu-matrix",
           });
-
-          console.log(res);
 
           const role = res.data?.role;
           role
@@ -188,6 +203,27 @@ export function LoginForm({
 
               <GoogleAuthButton />
 
+              <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
+                Or Login as
+              </FieldSeparator>
+
+              <ButtonGroup className="mx-auto" aria-label="Demo accounts">
+                {DEMO_ACCOUNTS.map((acc) => (
+                  <Button
+                    key={acc.label}
+                    type="button"
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => {
+                      form.setFieldValue("email", acc.email);
+                      form.setFieldValue("password", acc.password);
+                    }}
+                  >
+                    {acc.label}
+                  </Button>
+                ))}
+              </ButtonGroup>
+
               <FieldDescription className="text-center">
                 Don&apos;t have an account?{" "}
                 <Link href="/registration">Sign up</Link>
@@ -197,11 +233,13 @@ export function LoginForm({
 
           <div className="relative hidden bg-muted md:block">
             <Image
-              height={100}
-              width={100}
+              fill
               src="/loginBanner.png"
-              alt="Image"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.8]"
+              alt="Login banner"
+              sizes="(min-width: 768px) 50vw, 0px"
+              quality={90}
+              className="object-cover dark:brightness-[0.8]"
+              priority
             />
           </div>
         </CardContent>
