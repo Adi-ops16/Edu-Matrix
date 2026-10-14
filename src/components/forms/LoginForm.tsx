@@ -22,7 +22,6 @@ import { useLogin } from "@/hooks";
 import { loginSchema } from "@/schemas";
 import triggerToast from "@/utils/triggerToast";
 import GoogleAuthButton from "../Buttons/GoogleAuthButton";
-import { ButtonGroup } from "../ui/button-group";
 import { Spinner } from "../ui/spinner";
 
 const DEMO_ACCOUNTS = [
@@ -207,12 +206,13 @@ export function LoginForm({
                 Or Login as
               </FieldSeparator>
 
-              <ButtonGroup className="mx-auto" aria-label="Demo accounts">
+              <div className="mx-auto grid grid-cols-2 gap-2 lg:grid-cols-4">
                 {DEMO_ACCOUNTS.map((acc) => (
                   <Button
                     key={acc.label}
                     type="button"
-                    size="sm"
+                    className="h-auto min-h-9 w-full min-w-0 whitespace-normal wrap-break-word px-2 py-2 text-center leading-tight"
+                    size="lg"
                     variant="secondary"
                     onClick={() => {
                       form.setFieldValue("email", acc.email);
@@ -222,7 +222,7 @@ export function LoginForm({
                     {acc.label}
                   </Button>
                 ))}
-              </ButtonGroup>
+              </div>
 
               <FieldDescription className="text-center">
                 Don&apos;t have an account?{" "}
